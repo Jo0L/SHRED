@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
-const Watch = new Schema({
-    type: { type: String, required: true },
+const Accessory = new Schema({
+    type: { type: String, required: true }, // watch, sunglasses, jewlery
     color: String,
     company: String,
     price: Number,
@@ -14,4 +14,4 @@ const Watch = new Schema({
     stock: Number,
 });
 
-module.exports = model('Watch', Watch);
+module.exports = model('Accessory', Accessory);

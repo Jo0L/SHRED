@@ -4,7 +4,7 @@ const express = require('express');
 const session = require('express-session');
 const mongoose =  require('mongoose');
 const login = require('./routes/login')
-const watches = require('./routes/watch')
+const accessories = require('./routes/accessories')
 
 const { ensureAuthenticated } = require('./controllers/login')
 
@@ -36,6 +36,6 @@ server.get('/:page', (req, res, next) => {
 
 // ROUTERS
 server.use('', login);
-server.use('/watches', watches);
+server.use('/accessories', accessories);
 
 server.listen(process.env.PORT);

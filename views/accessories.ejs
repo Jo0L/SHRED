@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHRED</title>
+  <link rel="stylesheet" href="watches.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/accessories">Accessories</a>
+      <a href="/logout">Logout</a>
+      <div class="search-container">
+        <input type="text" placeholder="Search..." name="search">
+      </div>
+    </div>
+  </nav>
+
+  <!-- Watches Listing -->
+  <div class="watch-container">
+    <h1><%= capitalizedTitle %></h1>
+
+    <div class="watches-wrapper">
+        <div class="watches-list">
+
+          <% accessories.forEach(accessory => { %>
+              <div class="watch-card">
+                <img src="<%= accessory.img %>" alt="<%= accessory.company %>">
+                <h2><%= accessory.company %> - <%= accessory.type %></h2>
+                <p>$<%= accessory.price %></p>
+              </div>
+          <% }) %>
+        
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">&raquo;</a>
+        </div>
+    </div>
+  </div>
+
+</body>
+</html>

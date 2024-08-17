@@ -1,0 +1,47 @@
+[
+    {
+        "type": "jewelry",
+        "color": "Gold",
+        "company": "Tiffany & Co.",
+        "price": 1200,
+        "gender": "F",
+        "img": "https://via.placeholder.com/200",
+        "stock": 10
+    },
+    {
+        "type": "jewelry",
+        "color": "Silver",
+        "company": "Cartier",
+        "price": 800,
+        "gender": "F",
+        "img": "https://via.placeholder.com/200",
+        "stock": 15
+    },
+    {
+        "type": "jewelry",
+        "color": "Platinum",
+        "company": "Bvlgari",
+        "price": 1500,
+        "gender": "M",
+        "img": "https://via.placeholder.com/200",
+        "stock": 5
+    },
+    {
+        "type": "jewelry",
+        "color": "Rose Gold",
+        "company": "Harry Winston",
+        "price": 2000,
+        "gender": "F",
+        "img": "https://via.placeholder.com/200",
+        "stock": 8
+    },
+    {
+        "type": "jewelry",
+        "color": "Emerald",
+        "company": "Chopard",
+        "price": 1800,
+        "gender": "F",
+        "img": "https://via.placeholder.com/200",
+        "stock": 7
+    }
+]
