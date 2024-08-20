@@ -1,0 +1,89 @@
+/* Body Background */
+body {
+    background-color: #ffffff; /* Ensure the background is white */
+    color: #333333; /* Dark gray text for readability */
+}
+
+/* Header */
+header {
+    background-color: #2e2e2e; /* Dark header for contrast */
+    color: #ffffff; /* White text for better visibility */
+}
+
+/* Buttons */
+button, .btn {
+    background-color: #ff9900; /* Bright color for buttons */
+    color: #ffffff; /* White text on buttons */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+button:hover, .btn:hover {
+    background-color: #cc7a00; /* Slightly darker on hover */
+}
+
+/* Links */
+a {
+    color: #0066cc; /* Dark blue links for visibility */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #004c99; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #2e2e2e; /* Dark footer for contrast */
+    color: #ffffff; /* White text */
+    text-align: center;
+    padding: 15px 0;
+}
+
+/* Product Titles */
+.product-title {
+    color: #333333; /* Dark gray for visibility */
+    font-weight: bold;
+}
+
+/* Price Tags */
+.price {
+    color: #ff6600; /* Bright color for prices */
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Miscellaneous */
+h1, h2, h3, h4, h5, h6 {
+    color: #333333; /* Dark gray headers */
+}
+
+p {
+    color: #666666; /* Medium gray for paragraphs */
+}
+
+/* Cart Items */
+.cart-item {
+    background-color: #f9f9f9; /* Light gray for contrast */
+    border: 1px solid #e0e0e0;
+}
+
+.cart-item p {
+    color: #333333;
+}
+
+/* Nav Bar */
+.navbar {
+    background-color: #2e2e2e; /* Dark navigation bar */
+    color: white;
+}
+
+.navbar a {
+    color: #ffffff; /* White links in navigation */
+}
+
+.navbar a:hover {
+    color: #ff9900; /* Highlight links on hover */
+}
