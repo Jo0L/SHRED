@@ -1,13 +1,28 @@
 /* Body Background */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+/* Main content should take up available space */
+main {
+    flex: 1;
+}
+
 body {
     background-color: #ffffff; /* Ensure the background is white */
     color: #333333; /* Dark gray text for readability */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes full height */
+    margin: 0;
+    font-family: 'Arial', sans-serif;
 }
 
 /* Header */
 header {
     background-color: #2e2e2e; /* Dark header for contrast */
     color: #ffffff; /* White text for better visibility */
+    padding: 15px 0; /* Add padding for spacing */
 }
 
 /* Buttons */
@@ -39,12 +54,13 @@ footer {
     background-color: #2e2e2e; /* Dark footer for contrast */
     color: #ffffff; /* White text */
     text-align: center;
-    padding: 15px 0;
+    padding: 15px 0; /* Adjust padding as needed */
+    margin-top: auto; /* Push the footer to the bottom */
 }
 
 /* Product Titles */
 .product-title {
-    color: #333333; /* Dark gray for visibility */
+    color: #ffffff; /* Dark gray for visibility */
     font-weight: bold;
 }
 
@@ -56,12 +72,15 @@ footer {
 }
 
 /* Miscellaneous */
-h1, h2, h3, h4, h5, h6 {
+h2, h3, h4, h5, h6 {
     color: #333333; /* Dark gray headers */
 }
+h1 {
+    color: #ffffff; /* Dark gray headers */
+}
 
-p {
-    color: #666666; /* Medium gray for paragraphs */
+p.card-text {
+    color: #3d3d3d; /* Medium gray for paragraphs */
 }
 
 /* Cart Items */
@@ -72,6 +91,16 @@ p {
 
 .cart-item p {
     color: #333333;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 400px; /* Set a fixed height for the card */
+    overflow: hidden; /* Hide overflow to avoid unwanted scrollbars */
+    border: 1px solid #e0e0e0; /* Ensure card border */
+    border-radius: 5px; /* Optional: Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visual */
 }
 
 /* Nav Bar */
