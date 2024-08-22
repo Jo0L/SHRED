@@ -4,68 +4,68 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-  }
-  
-  /* Navbar */
-  .navbar {
+}
+
+/* Navbar */
+.navbar {
     display: flex;
     justify-content: space-between;
     background-color: #333;
     padding: 15px;
-  }
-  
-  .navbar a {
+}
+
+.navbar a {
     color: white;
     padding: 14px 20px;
     text-decoration: none;
     text-align: center;
-  }
-  
-  .navbar a:hover {
+}
+
+.navbar a:hover {
     background-color: #575757;
     color: white;
-  }
-  
-  .search-container {
+}
+
+.search-container {
     display: flex;
     align-items: center;
-  }
-  
-  .search-container input[type="text"] {
+}
+
+.search-container input[type="text"] {
     padding: 6px;
     margin-left: 16px;
     border: none;
     border-radius: 4px;
-  }
-  
-  /* Watches Container */
-  .watches-wrapper {
+}
+
+/* Watches Container */
+.watches-wrapper {
     display: flex;
     flex-direction: column;
-  }
-  
-  .watch-container {
+}
+
+.watch-container {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .watch-container h1 {
+}
+
+.watch-container h1 {
     text-align: center;
     margin-bottom: 40px;
-  }
-  
-  /* Watches List */
-  .watches-list {
+}
+
+/* Watches List */
+.watches-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-  }
-  
-  .watch-card {
+}
+
+.watch-card {
     width: 23%;
     background-color: #fff;
     padding: 20px;
@@ -73,40 +73,48 @@ body {
     text-align: center;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .watch-card img {
+}
+
+.watch-card img {
     width: 100%;
     border-radius: 8px;
-  }
-  
-  .watch-card h2 {
+}
+
+.watch-card h2 {
     font-size: 20px;
     margin: 15px 0;
-  }
-  
-  .watch-card p {
+}
+
+.watch-card p {
     font-size: 18px;
     color: #333;
-  }
-  
-  /* Pagination */
-  .pagination {
+}
+
+/* Pagination */
+.pagination {
     text-align: center;
     margin-top: 20px;
-  }
-  
-  .pagination a {
+}
+
+.pagination a {
     color: black;
     padding: 8px 16px;
     text-decoration: none;
     margin: 0 4px;
     border: 1px solid #ddd;
     border-radius: 4px;
-  }
-  
-  .pagination a:hover {
+}
+
+.pagination a:hover {
     background-color: #333;
     color: white;
-  }
-  
+}
+
+a {
+    text-decoration: none; 
+    color: black; 
+}
+
+a:hover {
+    color: rgb(49, 47, 47); 
+}
