@@ -1,0 +1,32 @@
+/* Your existing CSS styles */
+
+.about-section {
+    text-align: center;
+    padding: 20px;
+}
+
+.about-section h2 {
+    margin-top: 30px;
+}
+
+.about-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-section ul li {
+    margin-bottom: 10px;
+}
+
+.map-section {
+    text-align: center; 
+    padding-bottom: 50px; 
+}
+
+.map-section iframe {
+    display: inline-block; 
+    width: 70%; 
+    max-width: 800px; 
+    height: 800; 
+    border: 2px solid black; 
+}
