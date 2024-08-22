@@ -6,38 +6,6 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    background-color: #333;
-    padding: 15px;
-}
-
-.navbar a {
-    color: white;
-    padding: 14px 20px;
-    text-decoration: none;
-    text-align: center;
-}
-
-.navbar a:hover {
-    background-color: #575757;
-    color: white;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-}
-
-.search-container input[type="text"] {
-    padding: 6px;
-    margin-left: 16px;
-    border: none;
-    border-radius: 4px;
-}
-
 /* Watches Container */
 .watches-wrapper {
     display: flex;
