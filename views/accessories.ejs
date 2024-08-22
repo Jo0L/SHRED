@@ -1,24 +1,40 @@
-<!-- include header -->
-<%- include('include/_header') %>
-<!-- /include header -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHRED</title>
+  <link rel="stylesheet" href="watches.css">
+</head>
+<body>
 
-<link rel="stylesheet" href="accessories.css">
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/accessories">Accessories</a>
+      <a href="/logout">Logout</a>
+      <div class="search-container">
+        <input type="text" placeholder="Search..." name="search">
+      </div>
+    </div>
+  </nav>
 
-
-<!-- Watches Listing -->
-<div class="watch-container">
+  <!-- Watches Listing -->
+  <div class="watch-container">
     <h1><%= capitalizedTitle %></h1>
 
     <div class="watches-wrapper">
         <div class="watches-list">
 
-        <% accessories.forEach(accessory => { %>
-            <div class="watch-card">
+          <% accessories.forEach(accessory => { %>
+              <div class="watch-card">
                 <img src="<%= accessory.img %>" alt="<%= accessory.company %>">
-                <a href="/accessories/watches?id=<%= accessory.id%>"> <%= accessory.company %> - <%= accessory.type %></a>
+                <h2><%= accessory.company %> - <%= accessory.type %></h2>
                 <p>$<%= accessory.price %></p>
-            </div>
-        <% }) %>
+              </div>
+          <% }) %>
         
         </div>
 
@@ -32,7 +48,7 @@
             <a href="#">&raquo;</a>
         </div>
     </div>
-</div>
+  </div>
 
 </body>
 </html>
