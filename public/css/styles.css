@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background-image: url("https://www.searchenginejournal.com/wp-content/uploads/2022/08/google-shopping-ads-6304dccb7a49e-sej.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    z-index: 1;
+}
+
+.login-form {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 500px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-heading {
+    font-size: 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.signin-message {
+    font-size: 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    color: #555;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 150px;
+}

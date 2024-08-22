@@ -17,7 +17,7 @@ server.use(express.urlencoded({extended: false}));
 server.use(express.json());
 server.use(session({secret: 'root', saveUninitialized: false, resave: false}));
 server.set('view engine', 'ejs');
-server.use('/favicon.ico', express.static('public/favicon.ico'));
+server.use('/favicon.ico', express.static('public/icons/favicon.ico'));
 
 // AUTHENTICATION
 server.use('/', require('./routes/login'));
