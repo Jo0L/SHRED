@@ -1,5 +1,6 @@
 /* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader');
 
 /* Global Styling */
 body {
@@ -11,59 +12,74 @@ body {
 
 /* Navbar */
 .navbar {
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between; /* Keeps logo on the left and other items on the right */
-    background-color: #ff9900; /* Orange color */
+    background-color: #000; 
+    color: #FFF;
     padding: 10px 20px; /* Consistent spacing */
-    border-bottom: 1px solid #e0e0e0; /* Subtle border for Bootstrap-like look */
-    border-radius: 8px; /* Rounder edges for navbar */
+    /* border-bottom: 1px solid #e0e0e0; Subtle border for Bootstrap-like look */
+    /* border-radius: 8px; Rounder edges for navbar */
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
 }
 
-.navbar .logo {
-    margin-right: 10px; /* Pushes the logo to the left */
-}
-
-.navbar .logo img {
-    height: 40px; /* Adjust the height as needed */
-    width: auto; /* Maintain aspect ratio */
-}
-
 .navbar .nav-items {
+    height: 70px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers the links within available space */
+    justify-content: space-between; 
     flex-grow: 1; /* Allows the items to grow and fill available space */
 }
 
 .navbar a, .dropdown .dropbtn {
     color: white;
-    padding: 10px 20px; /* Consistent padding */
+    padding: 10px 20px;
     text-decoration: none;
     text-align: center;
-    font-weight: 500; /* Bootstrap-like font weight */
-    font-size: 16px; /* Increased font size */
-    border-radius: 4px; /* Rounder edges for navbar links and dropdown button */
-    transition: background-color 0.3s, border-radius 0.3s; /* Smooth transitions */
+    font-weight: 300; 
+    font-size: 16px; 
+    border-radius: 4px; 
+    transition: background-color 0.2s, border-radius 0.2s; 
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: #ff8700; /* Darker orange for hover effect */
+.navbar a:hover, .dropdown:hover .dropbtn:hover {
+    background-color: #1F232B;
     color: white;
     border-radius: 8px; /* Rounder edges on hover */
+}
+
+.navbar .logo {
+    margin-right: 10px; /* Pushes the logo to the left */
+    font-family: 'Newsreader';
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 1px;
+    transition: all .1s ease-in;
+}
+
+.navbar .logo:hover {
+    background-color: #000;
+    letter-spacing: 0.2em;
+}
+
+.navbar .right {
+    display: flex;
+    gap: 10px; 
 }
 
 /* Dropdown */
 .dropdown {
     position: relative;
     display: inline-block;
+    align-content: center;
 }
 
 .dropdown-content {
+    padding: 8px;
     display: none;
     position: absolute;
-    background-color: #fff;
+    background-color: #000;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -71,19 +87,19 @@ body {
 }
 
 .dropdown-content a {
-    color: #333;
+    color: #FFF;
     padding: 10px 20px; /* Consistent padding */
     text-decoration: none;
     display: block;
     text-align: left;
     font-size: 16px; /* Increased font size */
     border-radius: 4px; /* Rounder edges for dropdown links */
-    transition: background-color 0.3s, border-radius 0.3s; /* Smooth transitions */
+    transition: background-color 0.2s, border-radius 0.2s; /* Smooth transitions */
 }
 
 .dropdown-content a:hover {
-    background-color: #ff9900; /* Light orange for hover effect */
-    border-radius: 8px; /* Rounder edges on hover */
+    background-color: #1F232B;
+    border-radius: 8px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -91,8 +107,9 @@ body {
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #ff8700; /* Darker orange for dropdown button hover effect */
-    border-radius: 8px; /* Rounder edges on hover */
+    background-color: #000; 
+    color: #FFF;
+    border-radius: 8px;
 }
 
 /* Search Bar */
@@ -107,5 +124,5 @@ body {
     border: 1px solid #ccc; /* Light border for input */
     border-radius: 20px; /* Rounder edges for search bar */
     font-size: 14px; /* Adjust font size for better readability */
-    transition: border-radius 0.3s; /* Smooth transitions */
+    transition: border-radius 0.2s; /* Smooth transitions */
 }

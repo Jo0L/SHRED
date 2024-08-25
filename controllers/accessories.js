@@ -14,7 +14,7 @@ const getAccessories = async (req, res) => {
     try {
         
         // Get type of accessory
-        const type = req.params.type;
+        const type = req.params.type?? 'all' ;
         const capitalizedTitle = type.charAt(0).toUpperCase() + type.slice(1);
 
         // Assuming this is a placeholder for real data
