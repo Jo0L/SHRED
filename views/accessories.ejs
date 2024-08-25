@@ -1,38 +1,38 @@
-<!-- include header -->
-<%- include('include/_header') %>
-<!-- /include header -->
-
-<link rel="stylesheet" href="/css/accessories.css">
-
-
-<!-- Watches Listing -->
-<div class="watch-container">
-    <h1><%= capitalizedTitle %></h1>
-
-    <div class="watches-wrapper">
-        <div class="watches-list">
-
-        <% accessories.forEach(accessory => { %>
-            <div class="watch-card">
-                <img src="<%= accessory.img %>" alt="<%= accessory.company %>">
-                <a href="/accessories/watches?id=<%= accessory.id%>"> <%= accessory.company %> - <%= accessory.type %></a>
-                <p>$<%= accessory.price %></p>
-            </div>
-        <% }) %>
+<html>
+    <head>
+        <%- include('include/_header') %>
         
+        <link rel="stylesheet" href="/css/accessories.css">
+    </head>
+    <body>
+        <!-- Watches Listing -->
+        <div class="watch-container">
+            <h1><%= capitalizedTitle %></h1>
+
+            <div class="watches-wrapper">
+                <div class="watches-list">
+
+                <% accessories.forEach(accessory => { %>
+                    <div class="watch-card">
+                        <img src="<%= accessory.img %>" alt="<%= accessory.company %>">
+                        <a href="/accessories/watches?id=<%= accessory.id%>"> <%= accessory.company %> - <%= accessory.type %></a>
+                        <p>$<%= accessory.price %></p>
+                    </div>
+                <% }) %>
+                
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <a href="#">&laquo;</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">&raquo;</a>
+                </div>
+            </div>
         </div>
 
-        <!-- Pagination -->
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">&raquo;</a>
-        </div>
-    </div>
-</div>
-
-</body>
+    </body>
 </html>
