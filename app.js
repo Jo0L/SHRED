@@ -20,22 +20,27 @@ server.set('view engine', 'ejs');
 server.use('/favicon.ico', express.static('public/icons/favicon.ico'));
 
 // AUTHENTICATION
-server.use('/', require('./routes/login'));
-server.get('/', ensureAuthenticated, (req, res, next) => next());
+server.use('/account', require('./routes/login'));
+server.use('/cart', require('./routes/login'));
+server.use('/manager', require('./routes/login'));
+server.get('/account', ensureAuthenticated, (req, res, next) => next());
+server.get('/cart', ensureAuthenticated, (req, res, next) => next());
+
+// ROUTERS
+server.use('', login);
+server.use('/accessories', accessories);
 
 // static HTML with and without its suffix
 server.use(express.static('public'))
+server.get('/', (req, res) => res.render('index', {username: req.session.username}));
 server.get('/:page', (req, res, next) => {
-    const filePath = `${__dirname}/public/${req.params.page}.html`
-    if (existsSync(filePath)) {
-        res.sendFile(filePath);
+    const page = req.params.page;
+    if (existsSync(`${__dirname}/views/${page}.ejs`)){
+        res.render(page, {username: req.session.username});
     } else {
         next();
     }
 });
 
-// ROUTERS
-server.use('', login);
-server.use('/accessories', accessories);
 
 server.listen(process.env.PORT);

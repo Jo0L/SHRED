@@ -21,7 +21,7 @@ const getAccessories = async (req, res) => {
         const accessories = await accessoriesService.getAccessories(type);
 
         
-        res.status(200).render('accessories', { accessories, capitalizedTitle });
+        res.status(200).render('accessories', { accessories, capitalizedTitle, username: req.session.username });
     } catch (err) {
         console.error(err); // Log the error for debugging
         res.status(500).json({ error: 'Failed to fetch accessories' });

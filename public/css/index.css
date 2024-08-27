@@ -107,20 +107,6 @@ p.card-text {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visual */
 }
 
-/* Nav Bar */
-.navbar {
-    background-color: #2e2e2e;
-    color: white;
-}
-
-.navbar a {
-    color: #ffffff; 
-}
-
-.navbar a:hover {
-    color: #ff9900;
-}
-
 .banner {
     min-height: 300px;
     max-height: 300px;
@@ -135,7 +121,7 @@ p.card-text {
         font-size: 32px;
     }
     .btn {
-        width: 150px;
+        width: 110px;
     }
     img {
        height: 300px;
