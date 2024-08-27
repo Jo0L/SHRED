@@ -6,6 +6,12 @@ const ensureAuthenticated = async (req, res, next) => {
     res.redirect('/login');
 }
 
+const ensureAdmin = async (req, res, next) => {
+    if (req.session.username == 'admin@important.com')
+        return next();
+    res.redirect('/');
+}
+
 const logout = async (req, res) => {
     req.session.destroy(() => res.redirect('/'));
 }
@@ -35,4 +41,4 @@ const register = async (req, res) => {
     }
 }
 
-module.exports = { ensureAuthenticated, login, register, logout };
+module.exports = { ensureAuthenticated, ensureAdmin, login, register, logout };

@@ -42,15 +42,17 @@ button:hover, .btn:hover {
     color: #fff;
 }
 
-/* Links */
-a {
-    color: #0066cc; /* Dark blue links for visibility */
-    text-decoration: none;
-}
-
-a:hover {
-    color: #004c99; /* Darker blue on hover */
-    text-decoration: underline;
+main {
+    /* Links */
+    a {
+        color: #0066cc; /* Dark blue links for visibility */
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: #004c99; /* Darker blue on hover */
+        text-decoration: underline;
+    }
 }
 
 /* Footer */
@@ -105,20 +107,6 @@ p.card-text {
     border: 1px solid #e0e0e0; /* Ensure card border */
     border-radius: 5px; /* Optional: Rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visual */
-}
-
-/* Nav Bar */
-.navbar {
-    background-color: #2e2e2e;
-    color: white;
-}
-
-.navbar a {
-    color: #ffffff; 
-}
-
-.navbar a:hover {
-    color: #ff9900;
 }
 
 .banner {

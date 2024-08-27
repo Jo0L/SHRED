@@ -9,6 +9,14 @@ body {
     padding: 0;
     background-color: #f4f4f4;
 }
+/* Hide browser's scrollbar */
+html::-webkit-scrollbar {
+    display: none;
+}  
+html {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+} 
 
 /* Navbar */
 .navbar {
@@ -19,9 +27,15 @@ body {
     background-color: #000; 
     color: #FFF;
     padding: 10px 20px; /* Consistent spacing */
-    /* border-bottom: 1px solid #e0e0e0; Subtle border for Bootstrap-like look */
-    /* border-radius: 8px; Rounder edges for navbar */
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+
+    .important {
+        background-color: #C94B25;
+        border-radius: 8px; /* Rounder edges on hover */
+    }
+    .important:hover {
+        background-color: #c2350a;
+    }
 }
 
 .navbar .nav-items {

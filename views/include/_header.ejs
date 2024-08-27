@@ -8,10 +8,6 @@
 
 </head>
 <body>
-
-  <body>
-
-    <!-- Navbar -->
     <nav>
         <div class="navbar">
             <a href="/" class="logo">SHRED</a>
@@ -25,7 +21,21 @@
                         <a href="/accessories/sunglasses">Sunglasses</a>
                     </div>
                 </div>
-                <a href="/logout">Logout</a>
+                <% if ( username ) { %>
+                    <div class="dropdown">
+                        <% if ( username == 'admin@important.com' ) { %>
+                            <a href="/manager" class="dropbtn"> Management </a>
+                        <% } else { %>
+                            <a href="/account" class="dropbtn"> My Account </a>
+                        <% } %>
+                        <div class="dropdown-content">
+                            <a href="/logout"> Logout </a>
+                        </div>
+                    </div>
+                    <a class="important" href="/cart"> Cart </a>
+                  <% } else { %>
+                    <a class="important" href="/login">Login</a>
+                <% } %>
             </div>
         </div>
     </nav>

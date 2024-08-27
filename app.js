@@ -6,7 +6,7 @@ const mongoose =  require('mongoose');
 const login = require('./routes/login')
 const accessories = require('./routes/accessories')
 
-const { ensureAuthenticated } = require('./controllers/login')
+const { ensureAuthenticated, ensureAdmin } = require('./controllers/login')
 
 // MONGO
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
@@ -20,22 +20,28 @@ server.set('view engine', 'ejs');
 server.use('/favicon.ico', express.static('public/icons/favicon.ico'));
 
 // AUTHENTICATION
-server.use('/', require('./routes/login'));
-server.get('/', ensureAuthenticated, (req, res, next) => next());
+server.use('/manager', require('./routes/login'));
+server.get('/manager', ensureAdmin, (req, res) => res.render('manager', {username: req.session.username}));
+['/account', '/cart'].forEach(page => {
+    server.use(page, require('./routes/login'));
+    server.get(page, ensureAuthenticated, (req, res, next) => next());
+})
+
+// ROUTERS
+server.use('', login);
+server.use('/accessories', accessories);
 
 // static HTML with and without its suffix
 server.use(express.static('public'))
+server.get('/', (req, res) => res.render('index', {username: req.session.username}));
 server.get('/:page', (req, res, next) => {
-    const filePath = `${__dirname}/public/${req.params.page}.html`
-    if (existsSync(filePath)) {
-        res.sendFile(filePath);
+    const page = req.params.page;
+    if (existsSync(`${__dirname}/views/${page}.ejs`)){
+        res.render(page, {username: req.session.username});
     } else {
         next();
     }
 });
 
-// ROUTERS
-server.use('', login);
-server.use('/accessories', accessories);
 
 server.listen(process.env.PORT);
