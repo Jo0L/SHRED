@@ -3,7 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Newsreader');
 
 /* Global Styling */
-/* Hide scrollbar for Chrome, Safari and Opera */
 body {
     font-family: 'Roboto', Arial, sans-serif; /* Apply the new font */
     margin: 0;
@@ -28,8 +27,6 @@ html {
     background-color: #000; 
     color: #FFF;
     padding: 10px 20px; /* Consistent spacing */
-    /* border-bottom: 1px solid #e0e0e0; Subtle border for Bootstrap-like look */
-    /* border-radius: 8px; Rounder edges for navbar */
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
 
     .important {
