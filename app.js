@@ -6,7 +6,7 @@ const mongoose =  require('mongoose');
 const login = require('./routes/login')
 const accessories = require('./routes/accessories')
 
-const { ensureAuthenticated } = require('./controllers/login')
+const { ensureAuthenticated, ensureAdmin } = require('./controllers/login')
 
 // MONGO
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
@@ -20,11 +20,12 @@ server.set('view engine', 'ejs');
 server.use('/favicon.ico', express.static('public/icons/favicon.ico'));
 
 // AUTHENTICATION
-server.use('/account', require('./routes/login'));
-server.use('/cart', require('./routes/login'));
 server.use('/manager', require('./routes/login'));
-server.get('/account', ensureAuthenticated, (req, res, next) => next());
-server.get('/cart', ensureAuthenticated, (req, res, next) => next());
+server.get('/manager', ensureAdmin, (req, res) => res.render('manager', {username: req.session.username}));
+['/account', '/cart'].forEach(page => {
+    server.use(page, require('./routes/login'));
+    server.get(page, ensureAuthenticated, (req, res, next) => next());
+})
 
 // ROUTERS
 server.use('', login);
