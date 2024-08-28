@@ -6,6 +6,9 @@ const User = new Schema({
     firstName: String,
     lastName: String,
     gender: String, // TODO: Decide if to keep this as "M" | "F"
+    address: String,
+    mail: String,
+    whishlist: Array
 });
 
 module.exports = model('users', User);

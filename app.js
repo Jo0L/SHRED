@@ -5,6 +5,8 @@ const session = require('express-session');
 const mongoose =  require('mongoose');
 const login = require('./routes/login')
 const accessories = require('./routes/accessories')
+const users = require('./routes/users')
+const orders = require('./routes/orders')
 
 const { ensureAuthenticated, ensureAdmin } = require('./controllers/login')
 
@@ -30,6 +32,8 @@ server.get('/manager', ensureAdmin, (req, res) => res.render('manager', {usernam
 // ROUTERS
 server.use('', login);
 server.use('/accessories', accessories);
+server.use('/users', users);
+server.use('/orders', orders);
 
 // static HTML with and without its suffix
 server.use(express.static('public'))
