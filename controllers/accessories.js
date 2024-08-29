@@ -10,11 +10,17 @@ const createAccessory = async (req, res) => {
         res.status(500).json({ error: 'Failed to create accessory' });
     }
 };
+
 const getAccessories = async (req, res) => {
     try {
-        
         // Get type of accessory
         const type = req.params.type?? 'all' ;
+        const id = req.query.id;
+
+        if (id) {
+            return getAccessory(req, res);
+        } // Forward the request to getAccessory
+
         const capitalizedTitle = type.charAt(0).toUpperCase() + type.slice(1);
 
         // Assuming this is a placeholder for real data
@@ -29,12 +35,12 @@ const getAccessories = async (req, res) => {
 };
 
 const getAccessory = async (req, res) => {
-    const Accessory = await accessoriesService.getAccessoryById(req.params.id);
-    if (!Accessory) {
+    const accessory = await accessoriesService.getAccessoryById(req.query.id);
+    if (!accessory) {
         return res.status(404).json({errors: ['Accessory not found'] }); 
     }
 
-    res.json(Accessory);
+    res.status(200).render('accessory', { accessory, username: req.session.username });;
 };
 
 

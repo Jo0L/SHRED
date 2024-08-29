@@ -1,0 +1,82 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+.breadcrumb {
+    font-family: 'Georgia', serif;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+.breadcrumb a {
+    color: #000;
+    text-decoration: none;
+    margin-right: 5px;
+}
+.breadcrumb a:last-child {
+    color: #aaa;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd; 
+    margin: 30px 0; 
+}
+
+.product {
+    display: flex;
+    gap: 20px;
+}
+.product img {
+    width: 300px;
+    height: auto;
+    margin-right: 40px;
+    border-radius: 8px;
+}
+.product-details {
+    flex: 1;
+}
+.product-details h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.price {
+    font-size: 20px;
+    color: #d9534f;
+    margin-bottom: 35px;
+}
+.text-muted {
+    color: #888;
+    margin-bottom: 10px;
+}
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.wishlist {
+    font-size: 28px;
+    color: #888;
+    cursor: pointer;
+}
+.add-to-cart {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+.edit-item {
+    background-color: #eef5f4;
+    color: #000;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}

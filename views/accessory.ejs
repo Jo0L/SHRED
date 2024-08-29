@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <%- include('include/_header') %>
+        
+        <link rel="stylesheet" href="/css/accessory.css">
+    
+    </head>
+    <body>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/accessories/<%= accessory.type %>"><%= accessory.type %></a> > <a href="#"><%= accessory.gender %></a>
+            </div>
+
+            <hr>
+            
+            <div class="product">
+                <img src="/images/example_watch.jpg" alt="Cluse Watch">
+                <div class="product-details">
+                    <h1><%= accessory.company %></h1>
+                    <p class="price">$<%= accessory.price %></p>
+                    <p class="text-muted"><%= accessory.color %></p>
+                    <div class="buttons">
+                        <span class="wishlist">☆</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                        <% if ( username == 'admin@important.com' ) { %>
+                            <button class="edit-item">Edit Item</button>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<!-- TODO 
+edit the FEMALE/MALE url for it to filter by gender
+edit the eddit-button
+edit the wishlist button 
+change the static photo
+add a popout- you cannot add to card unless you sign in
+-->
