@@ -9,16 +9,16 @@ body {
 }
 
 .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    height: calc(100% + 20px);
+    width: calc(100% + 20px);
     z-index: -1;
-    background-image: url("https://www.searchenginejournal.com/wp-content/uploads/2022/08/google-shopping-ads-6304dccb7a49e-sej.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-image: url('../images/logo.png');
+    background-color: rgba(0, 0, 0, 0.93);
+    background-repeat: repeat;
+    background-size : 200px 200px;
 }
 
 .container {
@@ -26,7 +26,7 @@ body {
 }
 
 .login-form {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.95);
     padding: 2rem;
     border-radius: 8px;
     width: 500px;
@@ -54,4 +54,16 @@ body {
     top: 20px;
     left: 20px;
     width: 150px;
+}
+
+.btn-block {
+    background-color: #C94B25; 
+    color: #ffffff; 
+    border-width: 0px;
+}
+
+.btn-block:hover {
+    background-color: #c2350a; 
+    color: #fff;
+    border-width: 0px;
 }

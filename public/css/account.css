@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader');
+
+main {
+    padding: 5px;
+}
+
+hr {
+    margin-top: 10px;
+    width: calc(100vw - 40px);
+}
+
+h1 {
+    font-family: 'Newsreader';
+    font-size: 48px;
+    margin: 20px 0px 0px 20px;
+}
+
+h1::first-letter {
+    text-transform: capitalize;
+}   
+
+h5 {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.btn {
+    background-color: #C94B25;
+    border-width: 0px;
+    font-size: smaller;
+    color:white;
+}
+.btn:hover {
+    background-color: #c2350a;
+    color:white;
+}
+
+.btn-secondary {
+    background-color: #9aa0a8;
+}
+.btn-secondary:hover {
+    background-color: #777c83;
+}
+
+
+.card {
+    background-color: #ebf2f2;
+    border: #c7d0db 1px solid;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+
+.clickable:hover {
+    cursor: pointer;
+    h5 {
+        text-decoration: underline;
+        color:#c2350a;
+    }
+}
+
+
+#info-keys {
+    font-weight: 500;
+}
+
+.info {
+    color: #303030
+}

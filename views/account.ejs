@@ -1,12 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <%- include('include/_header') %>
-        <!-- <link rel="stylesheet" href="css/account.css"> -->
+        <link rel="stylesheet" href="css/account.css">
     </head>
     <body>
-        <main> 
-            <h1>Hi <%= username %></h1>
+      
+        <h1><%= username.split('@')[0] %>'s History</h1>
+        <hr>
+
+        <main>
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- User's orders + whishlist -->
+                    <div class="col-8">
+                        <div id="order-container" class="mb-4"></div>
+                        <h5>Whishlist</h5>
+                        <div id="whishlist-container"></div>
+                    </div>
+                    <!-- User's info -->
+                    <div class="col-4 container">
+                        <div id="info-container" class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Saved Info</h5>
+                                <div class="row mb-4 info">
+                                    <div class="col-6 card-text" id="info-keys">
+                                    </div>
+                                    <div class="col-6 card-text" id="info-values">
+                                    </div>
+                                </div>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn" data-toggle="modal" data-target="#modal">CHANGE</button>
+
+                                <!-- Modal Structure -->
+                                <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit Info</h5>
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form id="edit-form">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="name">Address</label>
+                                                        <input type="text" class="form-control" id="address-input" name="address">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="mail">Mail</label>
+                                                        <input type="email" class="form-control" id="mail-input" name="mail">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                                                    <button type="button" class="btn" id="edit-button">save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="/js/account.js"></script>
     </body>
 </html>
