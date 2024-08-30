@@ -1,5 +1,6 @@
 const accessoriesService = require('../services/accessories');
 
+
 const createAccessory = async (req, res) => {
     const { type, color, company, price, gender, img, stock } = req.body;
     try {
@@ -10,10 +11,10 @@ const createAccessory = async (req, res) => {
     }
 };
 
-// Updated getAccessories method
 const getAccessories = async (req, res) => {
     try {
-        const type = req.query.type || 'all';
+        // Get type of accessory
+        const type = req.params.type?? 'all' ;
         const id = req.query.id;
 
         if (id) {
@@ -22,15 +23,10 @@ const getAccessories = async (req, res) => {
 
         const capitalizedTitle = type.charAt(0).toUpperCase() + type.slice(1);
 
-        // Call the filterAndSortAccessories method
-        const accessories = await accessoriesService.filterAndSortAccessories({
-            type,
-            gender: req.query.gender,
-            brand: req.query.brand,
-            sortBy: req.query.sortBy,
-            search: req.query.search
-        });
+        // Assuming this is a placeholder for real data
+        const accessories = await accessoriesService.getAccessories(type);
 
+        
         res.status(200).render('accessories', { accessories, capitalizedTitle, username: req.session.username });
     } catch (err) {
         console.error(err); // Log the error for debugging
@@ -44,13 +40,14 @@ const getAccessory = async (req, res) => {
         return res.status(404).json({errors: ['Accessory not found'] }); 
     }
 
-    res.status(200).render('accessory', { accessory, username: req.session.username });
+    res.status(200).render('accessory', { accessory, username: req.session.username });;
 };
+
 
 const updateAccessory = async (req, res) => {
     const { id, price, stock } = req.body;
     if (!price && !stock) {
-        return res.status(400).json({ errors: ['Stock or price required'] });
+        return res.status(400).json({ errors: ['stock or price required'] });
     }
     try {
         const accessory = await accessoriesService.updateAccessory(id, price, stock);
@@ -63,6 +60,7 @@ const updateAccessory = async (req, res) => {
     }
 };
 
+
 const deleteAccessory = async (req, res) => {
     const accessory = await accessoriesService.deleteAccessory(req.params.id);
     if (!accessory) {
@@ -71,6 +69,7 @@ const deleteAccessory = async (req, res) => {
 
     res.send();
 };
+
 
 // Updated to use filterAndSortAccessories
 const filterAndSortAccessories = async (req, res) => {
