@@ -43,14 +43,10 @@ const getAccessory = async (req, res) => {
     res.status(200).render('accessory', { accessory, username: req.session.username });;
 };
 
-
 const updateAccessory = async (req, res) => {
-    const { id, price, stock } = req.body;
-    if (!price && !stock) {
-        return res.status(400).json({ errors: ['stock or price required'] });
-    }
+    const { id, color, company, price, gender, img, stock } = req.body;
     try {
-        const accessory = await accessoriesService.updateAccessory(id, price, stock);
+        const accessory = await accessoriesService.updateAccessory(id, color, company, price, gender, img, stock);
         if (!accessory) {
             return res.status(404).json({ errors: ['Accessory not found'] });
         }
