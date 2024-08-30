@@ -70,10 +70,34 @@ const deleteAccessory = async (req, res) => {
     res.send();
 };
 
+
+// Updated to use filterAndSortAccessories
+const filterAndSortAccessories = async (req, res) => {
+    try {
+        const query = {
+            type: req.query.type || 'all',
+            gender: req.query.gender,
+            brand: req.query.brand,
+            sortBy: req.query.sortBy,
+            search: req.query.search
+        };
+
+        const capitalizedTitle = query.type.charAt(0).toUpperCase() + query.type.slice(1);
+
+        const accessories = await accessoriesService.filterAndSortAccessories(query);
+        
+        res.status(200).render('accessories', { accessories, capitalizedTitle, username: req.session.username });
+    } catch (err) {
+        console.error(err); // Log the error for debugging
+        res.status(500).json({ error: 'Failed to fetch accessories' });
+    }
+};
+
 module.exports = { 
     createAccessory, 
     getAccessories, 
     getAccessory,
     updateAccessory,
-    deleteAccessory
+    deleteAccessory,
+    filterAndSortAccessories
 };

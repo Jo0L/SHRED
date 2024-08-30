@@ -1,28 +1,55 @@
 <html>
     <head>
         <%- include('include/_header') %>
-        
         <link rel="stylesheet" href="/css/accessories.css">
     </head>
     <body>
-        <!-- Watches Listing -->
+        <div class="filter-bar">
+            <div class="sort-section">
+                <select id="sortBy" class="sort-dropdown">
+                    <option value="">Sort by</option>
+                    <option value="a-z">A-Z</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                </select>
+            </div>
+        
+            <input type="text" id="search" class="search-bar" placeholder="Search by Brand or Type" />
+        
+            <div class="filter-section">
+                <select id="type" class="filter-dropdown">
+                    <option value="">Type</option>
+                    <option value="watches">Watches</option>
+                    <option value="jewelry">Jewelry</option>
+                    <option value="sunglasses">Sunglasses</option>
+                </select>
+            
+                <select id="gender" class="filter-dropdown">
+                    <option value="">Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            
+            </div>
+        
+            <button id="applyFiltersBtn">Apply Filters</button>
+            <button id="resetFiltersBtn" class="reset-btn">Reset Filters</button>
+        </div>
+
         <div class="watch-container">
             <h1><%= capitalizedTitle %></h1>
 
             <div class="watches-wrapper">
                 <div class="watches-list">
-
-                <% accessories.forEach(accessory => { %>
-                    <div class="watch-card">
-                        <img src="<%= accessory.img %>" alt="<%= accessory.company %>">
-                        <a href="/accessories/<%= accessory.type %>/?id=<%= accessory.id%>"> <%= accessory.company %> - <%= accessory.type %></a>
-                        <p>$<%= accessory.price %></p>
-                    </div>
-                <% }) %>
-                
+                    <% accessories.forEach(accessory => { %>
+                        <div class="watch-card">
+                            <img src="<%= accessory.img %>" alt="<%= accessory.company %>">
+                            <a href="/accessories/<%= accessory.type %>/?id=<%= accessory._id%>"> <%= accessory.company %> - <%= accessory.type %></a>
+                            <p>$<%= accessory.price %></p>
+                        </div>
+                    <% }) %>
                 </div>
 
-                <!-- Pagination -->
                 <div class="pagination">
                     <a href="#">&laquo;</a>
                     <a href="#">1</a>
@@ -33,6 +60,6 @@
                 </div>
             </div>
         </div>
-
+        <script src="/js/filter.js"></script>
     </body>
 </html>
