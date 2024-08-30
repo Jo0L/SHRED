@@ -50,10 +50,37 @@ const deleteAccessory = async (id) => {
     return accessory;
 };
 
+const filterAndSortAccessories = async ({ type, gender, brand, sortBy, search }) => {
+    try {
+        // Build query object
+        let query = {};
+        if (type !== 'all') query.type = type;
+        if (gender) query.gender = gender;
+        if (brand) query.company = new RegExp(brand, 'i'); // Case-insensitive search
+        if (search) query.$or = [
+            { type: new RegExp(search, 'i') },
+            { company: new RegExp(search, 'i') }
+        ];
+
+        // Build sort options
+        const sortOptions = {};
+        if (sortBy === 'a-z') sortOptions.company = 1;
+        if (sortBy === 'price-asc') sortOptions.price = 1; // Low to High
+        if (sortBy === 'price-desc') sortOptions.price = -1; // High to Low
+
+        return await Accessory.find(query).sort(sortOptions);
+    } catch (err) {
+        throw new Error('Failed to filter and sort accessories');
+    }
+};
+
+
+
 module.exports = {
     createAccessory, 
     getAccessoryById, 
     getAccessories, 
     updateAccessory, 
-    deleteAccessory
+    deleteAccessory,
+    filterAndSortAccessories
   };

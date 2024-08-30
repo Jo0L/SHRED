@@ -7,11 +7,6 @@ body {
 }
 
 /* Watches Container */
-.watches-wrapper {
-    display: flex;
-    flex-direction: column;
-}
-
 .watch-container {
     max-width: 1200px;
     margin: 20px auto;
@@ -27,6 +22,11 @@ body {
 }
 
 /* Watches List */
+.watches-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .watches-list {
     display: flex;
     flex-wrap: wrap;
@@ -85,4 +85,67 @@ a {
 
 a:hover {
     color: rgb(49, 47, 47); 
+}
+
+/* Filter Bar Styling */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Grouping for alignment */
+.sort-section,
+.filter-section {
+    display: flex;
+    align-items: center;
+}
+
+.sort-section {
+    margin-right: 20px;
+}
+
+.filter-section {
+    margin-right: 20px;
+}
+
+/* Styling for dropdowns and input */
+.sort-dropdown,
+.filter-dropdown,
+.search-bar {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin: 0 10px 0 0; /* Adjust margin for spacing */
+    flex: 1 1 auto; /* Allow elements to grow and shrink */
+}
+
+/* Button styling */
+button {
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: #d9542b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px; /* Adjust margin for spacing */
+    flex: 1 1 auto; /* Allow buttons to grow and shrink */
+}
+
+button:hover {
+    background-color: #c13a1b;
+}
+
+button.reset-btn {
+    background-color: #777;
+}
+
+button.reset-btn:hover {
+    background-color: #555;
 }
