@@ -80,3 +80,37 @@ hr {
     cursor: pointer;
     border-radius: 4px;
 }
+.btn {
+    background-color: #C94B25;
+    border-width: 0px;
+    font-size: smaller;
+    color:white;
+}
+.btn:hover {
+    background-color: #c2350a;
+    color:white;
+}
+
+.btn-secondary {
+    background-color: #9aa0a8;
+}
+.btn-secondary:hover {
+    background-color: #777c83;
+}
+
+.clickable:hover {
+    cursor: pointer;
+    h5 {
+        text-decoration: underline;
+        color:#c2350a;
+    }
+}
+
+
+#info-keys {
+    font-weight: 500;
+}
+
+.info {
+    color: #303030
+}

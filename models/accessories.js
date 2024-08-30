@@ -1,15 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const Accessory = new Schema({
-    type: { type: String, required: true }, // watch, sunglasses, jewlery
+    type: { type: String, enum: ['watchs', 'sunglasses', 'jewlery'], required: true },
     color: String,
     company: String,
-    price: Number,
-    gender: {
-        type: String,
-        enum: ['M', 'F'], // Restricts gender to 'M' or 'F'
-        required: true
-    },
+    price: { type: Number, required: true },
+    gender: { type: String, enum: ['Male', 'Female'], required: true },
     img: String, // URL or file path to the image
     stock: Number,
 });

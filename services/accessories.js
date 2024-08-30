@@ -32,12 +32,17 @@ const getAccessories = async (accessoryType) => {
 };
 
 // we need to think what we want to update - maybe only price? maybe 2 diffrent functions?
-const updateAccessory = async (id, price, stock) => {
+const updateAccessory = async (id, color, company, price, gender, img, stock) => {
     const accessory = await getAccessoryById(id);
     if (!accessory)
         return null;
+    accessory.color = color;
+    accessory.company = company;
     accessory.price = price;
+    accessory.gender = gender;
+    accessory.img = img;
     accessory.stock = stock;
+
     await accessory.save();
     return accessory;
 };
