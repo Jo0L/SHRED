@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchBar = document.getElementById('search');
     const typeDropdown = document.getElementById('type');
     const genderDropdown = document.getElementById('gender');
-    const brandInput = document.getElementById('brand');
+    const colorDropdown = document.getElementById('color'); // Add this line
 
     // Populate filter fields with current values
     const params = new URLSearchParams(window.location.search);
@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     searchBar.value = params.get('search') || '';
     typeDropdown.value = params.get('type') || '';
     genderDropdown.value = params.get('gender') || '';
+    colorDropdown.value = params.get('color') || ''; // Add this line
 
     // Function to apply filters
     function applyFilters() {
@@ -22,13 +23,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const gender = genderDropdown.value;
         if (gender) params.set('gender', gender);
 
+        const color = colorDropdown.value; // Add this line
+        if (color) params.set('color', color); // Add this line
+
         const sortBy = sortDropdown.value;
         if (sortBy) params.set('sortBy', sortBy);
 
         const search = searchBar.value;
         if (search) params.set('search', search);
 
-        window.location.href = `/accessories/filter?` + params.toString();
+        window.location.href = '/accessories/filter?' + params.toString();
     }
 
     // Function to reset filters
@@ -36,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear all filter fields
         typeDropdown.value = '';
         genderDropdown.value = '';
+        colorDropdown.value = ''; // Add this line
         sortDropdown.value = '';
         searchBar.value = '';
 

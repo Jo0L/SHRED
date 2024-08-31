@@ -55,13 +55,13 @@ const deleteAccessory = async (id) => {
     return accessory;
 };
 
-const filterAndSortAccessories = async ({ type, gender, brand, sortBy, search }) => {
+const filterAndSortAccessories = async ({ type, gender, sortBy, search, color }) => {
     try {
         // Build query object
         let query = {};
         if (type !== 'all') query.type = type;
         if (gender) query.gender = gender;
-        if (brand) query.company = new RegExp(brand, 'i'); // Case-insensitive search
+        if (color) query.color = color;
         if (search) query.$or = [
             { type: new RegExp(search, 'i') },
             { company: new RegExp(search, 'i') }
@@ -79,6 +79,16 @@ const filterAndSortAccessories = async ({ type, gender, brand, sortBy, search })
     }
 };
 
+const getDistinctColors = async () => {
+    try {
+        return await Accessory.distinct('color');
+    } catch (err) {
+        console.error('Error fetching distinct colors:', err);
+        throw new Error('Failed to retrieve distinct colors');
+    }
+};
+
+
 
 
 module.exports = {
@@ -87,5 +97,6 @@ module.exports = {
     getAccessories, 
     updateAccessory, 
     deleteAccessory,
-    filterAndSortAccessories
+    filterAndSortAccessories,
+    getDistinctColors
   };
