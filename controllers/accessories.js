@@ -70,8 +70,7 @@ const updateAccessory = async (req, res) => {
 
 
 const deleteAccessory = async (req, res) => {
-    const id = req.params.id;
-    const accessory = await accessoriesService.deleteAccessory(id);
+    const accessory = await accessoriesService.deleteAccessory(req.params.id);
     if (!accessory) {
         return res.status(404).json({ errors: ['Accessory not found'] }); 
     }
