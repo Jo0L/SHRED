@@ -55,15 +55,6 @@ main {
     }
 }
 
-/* Footer */
-footer {
-    background-color: #C94B25; /* Dark footer for contrast */
-    color: #ffffff; /* White text */
-    text-align: center;
-    padding: 15px 0; /* Adjust padding as needed */
-    margin-top: auto; /* Push the footer to the bottom */
-}
-
 /* Product Titles */
 .product-title {
     color: #ffffff; /* Dark gray for visibility */
