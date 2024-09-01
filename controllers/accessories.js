@@ -13,21 +13,35 @@ const createAccessory = async (req, res) => {
 
 const getAccessories = async (req, res) => {
     try {
-        // Get type of accessory
-        const type = req.params.type?? 'all' ;
+        const type = req.params.type || 'all';
         const id = req.query.id;
 
         if (id) {
-            return getAccessory(req, res);
-        } // Forward the request to getAccessory
+            return getAccessory(req, res); // Forward to getAccessory if ID is present
+        }
 
         const capitalizedTitle = type.charAt(0).toUpperCase() + type.slice(1);
 
-        // Assuming this is a placeholder for real data
-        const accessories = await accessoriesService.getAccessories(type);
+        // Fetch all accessories for rendering
+        const accessories = await accessoriesService.filterAndSortAccessories({
+            type,
+            gender: req.query.gender,
+            sortBy: req.query.sortBy,
+            search: req.query.search,
+            color: req.query.color
+        });
 
-        
-        res.status(200).render('accessories', { accessories, capitalizedTitle, username: req.session.username, isAdmin: req.session.isAdmin });
+        // Fetch distinct colors
+        const colors = await accessoriesService.getDistinctColors();
+
+        res.status(200).render('accessories', {
+            accessories,
+            capitalizedTitle,
+            username: req.session.username,
+            isAdmin: req.session.isAdmin,
+            colors // Pass colors to the view
+        });
+
     } catch (err) {
         console.error(err); // Log the error for debugging
         res.status(500).json({ error: 'Failed to fetch accessories' });
@@ -73,21 +87,34 @@ const filterAndSortAccessories = async (req, res) => {
         const query = {
             type: req.query.type || 'all',
             gender: req.query.gender,
-            brand: req.query.brand,
             sortBy: req.query.sortBy,
-            search: req.query.search
+            search: req.query.search,
+            color: req.query.color
         };
 
         const capitalizedTitle = query.type.charAt(0).toUpperCase() + query.type.slice(1);
 
         const accessories = await accessoriesService.filterAndSortAccessories(query);
         
-        res.status(200).render('accessories', { accessories, capitalizedTitle, username: req.session.username, isAdmin: req.session.isAdmin });
+
+        // Fetch distinct colors
+        const colors = await accessoriesService.getDistinctColors();
+
+        res.status(200).render('accessories', {
+            accessories,
+            capitalizedTitle,
+            username: req.session.username,
+            isAdmin: req.session.isAdmin,
+            colors // Pass colors to the view
+        });
+
     } catch (err) {
         console.error(err); // Log the error for debugging
         res.status(500).json({ error: 'Failed to fetch accessories' });
     }
 };
+
+
 
 module.exports = { 
     createAccessory, 
