@@ -7,7 +7,7 @@ const ensureAuthenticated = async (req, res, next) => {
 }
 
 const ensureAdmin = async (req, res, next) => {
-    if (req.session.username == 'admin@important.com')
+    if (req.session.isAdmin)
         return next();
     res.redirect('/');
 }
@@ -19,11 +19,14 @@ const logout = async (req, res) => {
 const login = async (req, res) => {
     const { username, password } = req.body;
     const result = await loginService.login(username, password);
-    console.log(result);
     if (result){
         req.session.username = username;
+        req.session.isAdmin = result.isAdmin ?? false;
+
         res.redirect('/');
     } else {
+        console.error('Login error:', error);
+
         res.redirect('/login?error=1');
         // TODO: toast?
     }

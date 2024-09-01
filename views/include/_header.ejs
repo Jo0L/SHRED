@@ -23,7 +23,7 @@
                 </div>
                 <% if ( username ) { %>
                     <div class="dropdown">
-                        <% if ( username == 'admin@important.com' ) { %>
+                        <% if ( isAdmin ) { %>
                             <a href="/manager" class="dropbtn"> Management </a>
                         <% } else { %>
                             <a href="/account" class="dropbtn"> My Account </a>
