@@ -27,7 +27,7 @@ const getAccessories = async (req, res) => {
         const accessories = await accessoriesService.getAccessories(type);
 
         
-        res.status(200).render('accessories', { accessories, capitalizedTitle, username: req.session.username });
+        res.status(200).render('accessories', { accessories, capitalizedTitle, username: req.session.username, isAdmin: req.session.isAdmin });
     } catch (err) {
         console.error(err); // Log the error for debugging
         res.status(500).json({ error: 'Failed to fetch accessories' });
@@ -40,7 +40,7 @@ const getAccessory = async (req, res) => {
         return res.status(404).json({errors: ['Accessory not found'] }); 
     }
 
-    res.status(200).render('accessory', { accessory, username: req.session.username });;
+    res.status(200).render('accessory', { accessory, username: req.session.username, isAdmin: req.session.isAdmin });;
 };
 
 const updateAccessory = async (req, res) => {
@@ -82,7 +82,7 @@ const filterAndSortAccessories = async (req, res) => {
 
         const accessories = await accessoriesService.filterAndSortAccessories(query);
         
-        res.status(200).render('accessories', { accessories, capitalizedTitle, username: req.session.username });
+        res.status(200).render('accessories', { accessories, capitalizedTitle, username: req.session.username, isAdmin: req.session.isAdmin });
     } catch (err) {
         console.error(err); // Log the error for debugging
         res.status(500).json({ error: 'Failed to fetch accessories' });

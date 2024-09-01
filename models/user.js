@@ -8,7 +8,18 @@ const User = new Schema({
     gender: String, // TODO: Decide if to keep this as "M" | "F"
     address: String,
     mail: String,
-    whishlist: Array
+    whishlist: Array,
+    isAdmin: Boolean,
+    cart: [
+        {
+            accessoryId: String,
+            quantity: Number,
+            price: Number,
+            title: String,
+            img: String,
+            addedAt: Date
+        }
+    ]
 });
 
 module.exports = model('users', User);

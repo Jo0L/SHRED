@@ -14,7 +14,7 @@ const login = async (username, password) => {
         _id: username,
         password,
     });
-    return user != null;
+    return user;
 }
 
 module.exports = { login, register };

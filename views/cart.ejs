@@ -1,12 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <%- include('include/_header') %>
-        <!-- <link rel="stylesheet" href="css/cart.css"> -->
+        <link rel="stylesheet" href="css/cart.css">
     </head>
+
     <body>
-        <main> 
-            <h1>Carttttt</h1>
-        </main>
+        <div class="cart-container">
+            <h1>Cart <span> <%= (cart.length) %> items</span></h1>
+            
+            <div class="cart-wrapper">
+                <div class="cart-items">
+                    <% if (cart.length === 0) { %>
+                        <p>Your cart is empty.</p>
+                    <% } else { %>
+                        <% cart.forEach(item => { %>
+                            <div id="<%= item.accessoryId %>" class="cart-item">
+                                <div class="img-details">
+                                    <img src="<%= item.img %>" alt="<%= item.title %>">
+                                </div>
+                
+                                <div class="item-details">
+                                    <div class="item-details-title">
+                                        <h2><%= item.title %></h2>
+                                        <h2>$<%= item.price * item.quantity %></h2>
+                                    </div>
+                
+                                    <p class="price">$<%= item.price %></p>
+                                    
+                                    <div class="item-controls">
+                                        <div class="quantity-controls">
+                                            <button id="dec-quantity" class="quantity-btn dec-quantity" data-accessory-id="<%= item.accessoryId %>">-</button>
+                                            <span id="quantity-<%= item.accessoryId %>"><%= item.quantity %></span>
+                                            <button id="inc-quantity" class="quantity-btn inc-quantity" data-accessory-id="<%= item.accessoryId %>">+</button>
+                                        </div>
+
+                                        <div>
+                                            <button id="delete-item" class="delete-btn delete-item" data-accessory-id="<%= item.accessoryId %>">delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } %>
+                </div>
+            
+                <div class="order-summary">
+                    <% if (cart.length > 0) { %>
+                        <h3>Order summary</h3>
+                        <p>Subtotal: <span>$<%= subtotal.toFixed(2) %></span></p>
+                        <p>Shipping: <span>$<%= shipping.toFixed(2) %></span></p>
+                        <p>Tax: <span><%= tax %></span></p>
+                        <p class="total">Total: <span>$<%= total.toFixed(2) %></span></p>
+                        <button class="payment-btn">continue to payment</button>
+                    <% } else { %>
+                        <h3>Order summary</h3>
+                        <p>Subtotal: <span>$0</span></p>
+                        <p>Shipping: <span>$0</span></p>
+                        <p>Tax: <span>$0</span></p>
+                        <p class="total">Total: <span>$0</span></p>
+                        <button class="payment-btn" disabled>continue to payment</button>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="/js/cart.js"></script>
     </body>
 </html>

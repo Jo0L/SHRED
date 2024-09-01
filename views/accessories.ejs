@@ -43,9 +43,11 @@
                 <div class="watches-list">
                     <% accessories.forEach(accessory => { %>
                         <div class="watch-card">
-                            <img src="<%= accessory.img %>" alt="<%= accessory.company %>">
-                            <a href="/accessories/<%= accessory.type %>/?id=<%= accessory._id%>"> <%= accessory.company %> - <%= accessory.type %></a>
-                            <p>$<%= accessory.price %></p>
+                            <a href="/accessories/<%= accessory.type %>/?id=<%= accessory._id%>">
+                                <img src="<%= accessory.img %>" alt="<%= accessory.company %>">
+                                <p> <%= accessory.company %> - <%= accessory.type %></p>
+                                <p>$<%= accessory.price %></p>
+                            </a>
                         </div>
                     <% }) %>
                 </div>

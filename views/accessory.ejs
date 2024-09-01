@@ -8,21 +8,21 @@
     <body>
         <div class="container">
             <div class="breadcrumb">
-                <a href="/accessories/<%= accessory.type %>"><%= accessory.type %></a> > <a href="#"><%= accessory.gender %></a>
+                <a href="/accessories/<%= accessory.type %>"><%= accessory.type %></a> > <a><%= accessory.gender %></a>
             </div>
 
             <hr>
             
             <div class="product">
-                <img src="/images/example_watch.jpg" alt="Cluse Watch">
+                <img src="<%= accessory.img %>" alt="Cluse Watch">
                 <div class="product-details">
                     <h1><%= accessory.company %></h1>
                     <p class="price">$<%= accessory.price %></p>
                     <p class="text-muted"><%= accessory.color %></p>
                     <div class="buttons">
                         <span class="wishlist">☆</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                        <% if ( username == 'admin@important.com' ) { %>
+                        <button id="add-to-cart" class="add-to-cart" data-accessory-id="<%= accessory._id %>" data-price="<%= accessory.price %>" data-quantity="1" data-title="<%= accessory.company %> - <%= accessory.color %>" data-img="<%= accessory.img %>">Add to Cart</button>
+                        <% if ( isAdmin) { %>
                             <button type="button" class="btn" data-toggle="modal" data-target="#modal">Edit Item</button>
                         <% } %>
                     </div>
