@@ -48,10 +48,7 @@ const updateAccessory = async (id, color, company, price, gender, img, stock) =>
 };
 
 const deleteAccessory = async (id) => {
-    const accessory = await getAccessoryById(id);
-    if (!accessory)
-        return null;
-    await accessory.remove();
+    const accessory = await Accessory.findByIdAndDelete(id);
     return accessory;
 };
 
