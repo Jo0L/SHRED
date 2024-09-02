@@ -29,6 +29,12 @@
                             <a href="/account" class="dropbtn"> My Account </a>
                         <% } %>
                         <div class="dropdown-content">
+                            <% if ( isAdmin ) { %>
+                                <a href="/manager/products"> Products </a>
+                                <a href="/manager/users"> Users </a>
+                                <a href="/manager/orders"> Orders </a>
+                                <a href="/manager/statistics"> statistics </a>
+                            <% } %>
                             <a href="/logout"> Logout </a>
                         </div>
                     </div>

@@ -1,17 +1,26 @@
 const Accessory = require('../models/accessories');
 
-const createAccessory = async ({ type, color, company, price, gender, img, stock }) => {
-    const accessory = new Accessory({
-        type, // watches / jewlery / sunglasses
-        color,
-        company,
-        price,
-        gender, //for female or male
-        img,
-        stock
-    });
-    await accessory.save();
-    return accessory;  // Return the saved accessory
+const createAccessory = async (type, color, company, price, gender, img, stock) => {
+    try {
+        const accessory = new Accessory({
+            type, // watches / jewelry / sunglasses
+            color,
+            company,
+            gender,
+            price,
+            stock, // for female or male
+            img
+        });
+
+        await accessory.save();
+        console.log('Accessory created successfully');
+        return accessory;
+
+
+    } catch (error) {
+        console.error('Error creating accessory:', error.message);
+        throw new Error('Failed to create accessory. Please try again.');
+    }
 };
 
 const getAccessoryById = async (id) => {

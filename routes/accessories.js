@@ -3,6 +3,7 @@ const router = express.Router();
 const accessoryController = require('../controllers/accessories');
 
 router.route('').get(accessoryController.getAccessories)
+//router.route('/admin').get(accessoryController.getAllProducts)
 
 // update an accessory
 router.route('/update-accessory').patch(accessoryController.updateAccessory)
@@ -19,10 +20,4 @@ router.route('/:type')
     .get(accessoryController.getAccessories)
     .post(accessoryController.getAccessory);
     
-//router.route('/:type/:id')
-//    .get(accessoryController.getAccessory)
-//    .patch(accessoryController.updateAccessory)
-//    .delete(accessoryController.deleteAccessory);
-
-
 module.exports = router;

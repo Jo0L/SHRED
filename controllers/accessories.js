@@ -48,6 +48,22 @@ const getAccessories = async (req, res) => {
     }
 };
 
+const getAllProducts = async (req, res) => {
+    try {
+        const type = 'all';
+        const accessories = await accessoriesService.getAccessories(type);
+        res.status(200).render('products', {
+            accessories,
+            username: req.session.username,
+            isAdmin: req.session.isAdmin,
+        });
+
+    } catch (err) {
+        console.error(err); 
+        res.status(500).json({ error: 'Failed to fetch products' });
+    }
+};
+
 const getAccessory = async (req, res) => {
     const accessory = await accessoriesService.getAccessoryById(req.query.id);
     if (!accessory) {
@@ -123,5 +139,6 @@ module.exports = {
     getAccessory,
     updateAccessory,
     deleteAccessory,
-    filterAndSortAccessories
+    filterAndSortAccessories,
+    getAllProducts
 };
