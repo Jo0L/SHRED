@@ -26,7 +26,8 @@ server.use('/favicon.ico', express.static('public/icons/favicon.ico'));
 
 // AUTHENTICATION
 server.use('/manager', require('./routes/login'));
-server.get('/manager', ensureAdmin, (req, res) => res.render('manager', {username: req.session.username, isAdmin: req.session.isAdmin}));
+// Define Middleware for '/manager' and all its sub-routes
+server.use('/manager', ensureAdmin, (req, res, next) => next());
 
 ['/account', '/cart'].forEach(page => {
     server.use(page, require('./routes/login'));

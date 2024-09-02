@@ -52,7 +52,7 @@ const getAllProducts = async (req, res) => {
     try {
         const type = 'all';
         const accessories = await accessoriesService.getAccessories(type);
-        res.status(200).render('products', {
+        res.status(200).render('manager/products', {
             accessories,
             username: req.session.username,
             isAdmin: req.session.isAdmin,
