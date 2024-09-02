@@ -8,6 +8,8 @@ const accessories = require('./routes/accessories')
 const users = require('./routes/users')
 const orders = require('./routes/orders')
 const cart = require('./routes/cart')
+const manager = require('./routes/manager')
+
 
 const { ensureAuthenticated, ensureAdmin } = require('./controllers/login')
 
@@ -25,6 +27,7 @@ server.use('/favicon.ico', express.static('public/icons/favicon.ico'));
 // AUTHENTICATION
 server.use('/manager', require('./routes/login'));
 server.get('/manager', ensureAdmin, (req, res) => res.render('manager', {username: req.session.username, isAdmin: req.session.isAdmin}));
+
 ['/account', '/cart'].forEach(page => {
     server.use(page, require('./routes/login'));
     server.get(page, ensureAuthenticated, (req, res, next) => next());
@@ -36,6 +39,7 @@ server.use('/accessories', accessories);
 server.use('/users', users);
 server.use('/cart', cart);
 server.use('/orders', orders);
+server.use('/manager', manager);
 
 // static HTML with and without its suffix
 server.use(express.static('public'))

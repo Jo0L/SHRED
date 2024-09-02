@@ -1,0 +1,46 @@
+/* Main Content Area */
+h1 {
+    font-family: 'Newsreader';
+    font-size: 48px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+h1::first-letter {
+    text-transform: capitalize;
+}
+
+.btn-success {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    background-color: #4CAF50;
+    border: none;
+}
+
+.table-container {
+    max-height: 500px; /* Set a fixed height for the table container */
+    overflow-y: auto;  /* Enable vertical scrolling */
+}
+
+.table {
+    background-color: #ebf2f2;
+    border: #c7d0db 1px solid;
+    border-radius: 10px;
+}
+
+thead {
+    background-color: #c2350a;
+    color: #fff;
+}
+
+td, th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+hr {
+    margin-top: 10px;
+    width: 100%;
+}
