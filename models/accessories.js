@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const Accessory = new Schema({
-    type: { type: String, enum: ['watchs', 'sunglasses', 'jewlery'], required: true },
+    type: { type: String, enum: ['watches', 'sunglasses', 'jewlery'], required: true },
     color: String,
     company: String,
     price: { type: Number, required: true },
