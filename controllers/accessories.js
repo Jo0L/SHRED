@@ -86,7 +86,6 @@ const updateAccessory = async (req, res) => {
     }
 };
 
-
 const deleteAccessory = async (req, res) => {
     const id = req.params.id;
     const accessory = await accessoriesService.deleteAccessory(id);
@@ -96,7 +95,6 @@ const deleteAccessory = async (req, res) => {
 
     res.send();
 };
-
 
 // Updated to use filterAndSortAccessories
 const filterAndSortAccessories = async (req, res) => {
@@ -130,8 +128,6 @@ const filterAndSortAccessories = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch accessories' });
     }
 };
-
-
 
 module.exports = { 
     createAccessory, 
