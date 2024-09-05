@@ -24,7 +24,7 @@ $(document).ready(() => {
     fetch('/users').then(async (res) => {
         const user = await res.json();
         Object.entries(user).forEach(([key, val]) => {
-            if (['address', 'mail'].includes(key) && !!val ){
+            if (['address', 'firstName', 'lastName'].includes(key) && !!val ){
                 $('#info-keys').append(`<p>${key}</p>`);
                 $('#info-values').append(`<p>${val}</p>`);
                 $(`#${key}-input`).val(val);
@@ -52,7 +52,7 @@ $('#edit-button').click(() => {
             window.location.reload(true);
         },
         error: function(xhr, status, error) {
-            // TODO: toast ('An error occurred: ' + error);
+            alert('Error changing user details: ' + error);;
         }
     });
 });

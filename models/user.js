@@ -1,13 +1,13 @@
 const { Schema, model } = require('mongoose');
 
 const User = new Schema({
-    _id: String, // mail & username
+    _id: String, // mail 
     password: { type: String, required: true },
     firstName: String,
     lastName: String,
-    gender: String, // TODO: Decide if to keep this as "M" | "F"
+    gender: { type: String, enum: ['Male', 'Female', 'Rather not say'], required: true },
     address: String,
-    mail: String,
+    //mail: String,
     whishlist: Array,
     isAdmin: Boolean,
     cart: [
