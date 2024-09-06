@@ -1,5 +1,5 @@
 const Order = require('../models/order');
-const { find } = require('../models/user');
+//const { find } = require('../models/user');
 
 const getOrdersByUser = async (user) => {
     return await Order.find({user});
@@ -15,7 +15,7 @@ const cancelOrder = async (id) => {
 };
 
 const updateOrderStatus = async (id) => {
-    const order = await findById(id);
+    const order = await Order.findById(id);
     if (!order)
         return null;
     order.status = 'Delivered';

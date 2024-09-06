@@ -1,21 +1,29 @@
-$(document).ready(function() {
-    // Cancel Order button click event
-    $('.cancel-order-btn').click(function() {
-        const orderId = $(this).data('id');
+    // Delete am item
+$(document).ready(() => {
+    // When the delete modal is shown
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget); 
+        const id = button.data('id'); 
+        $('#confirm-delete-button').data('id', id); // Store the ID in the delete button
+    });
 
-        // AJAX request to cancel the order
+    // When the delete button inside the modal is clicked
+    $('#confirm-delete-button').click(function() { 
+        const id = $(this).data('id'); 
         $.ajax({
-            url: `/manager/order-cancel/${orderId}`,
-            method: 'DELETE',
-            success: function(response) {
+            url: `/manager/order-cancel/${id}`,
+            type: 'DELETE',
+            success: () => {
+                $('#deleteModal').modal('hide');
                 alert('Order has been cancelled');
-                location.reload(); // Reload the page to reflect the change
+                window.location.reload(true);
             },
-            error: function(error) {
-                alert('Error cancelling the order');
+            error: (xhr, status, error) => {
+                alert('Error cancelling the order: ' + error);
             }
         });
     });
+});
 
     // Deliver Order button click event
     $('.deliver-order-btn').click(function() {
@@ -34,4 +42,4 @@ $(document).ready(function() {
             }
         });
     });
-});
+

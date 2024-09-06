@@ -17,6 +17,6 @@ router.route('/users/updateAdmin/:id').patch(userController.changeAdmin)
 // for orders
 router.route('/orders').get(ordersController.getAllOrders)
 router.route('/order-cancel/:id').delete(ordersController.cancelOrder)
-router.route('/users/order-deliver/:id').patch(ordersController.updateOrderStatus)
+router.route('/order-deliver/:id').patch(ordersController.updateOrderStatus)
 
 module.exports = router;

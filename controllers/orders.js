@@ -18,9 +18,8 @@ const getAllOrders = async (req, res) => {
 };
 
 const updateOrderStatus = async (req, res) => {
-    const id = req.body.id;
     try {
-        const order = await ordersService.updateOrderStatus(id);
+        const order = await ordersService.updateOrderStatus(req.params.id);
         if (!order) {
             return res.status(404).json({ errors: ['order not found'] });
         }

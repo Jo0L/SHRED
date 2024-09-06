@@ -10,6 +10,8 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Orders</h1>
+
+                <hr>
                 
                 <h3>Processing Orders</h3>
                 <div class="table-container">
@@ -21,7 +23,6 @@
                                 <th>Date</th>
                                 <th>Price</th>
                                 <th>Items</th>
-                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -33,9 +34,8 @@
                                     <td><%= new Date(order.date).toLocaleDateString() %></td>
                                     <td>$<%= order.price.toFixed(2) %></td>
                                     <td><%= order.items.length %></td>
-                                    <td><%= order.status %></td>
                                     <td>
-                                        <button class="btn btn-danger cancel-order-btn btn-sm" data-id="<%= order._id %>">Cancel Order</button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="<%= order._id %>">Cancel Order</button>
                                         <button class="btn btn-success deliver-order-btn btn-sm" data-id="<%= order._id %>">Mark as Delivered</button>
                                     </td>
                                 </tr>
@@ -73,6 +73,26 @@
                 </div>
             </div>
         </div>
+        <!-- Delete Confirmation Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Order</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to cancel this order? This action cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirm-delete-button">Delete</button>
+                    </div>
+                </div>
+            </div> 
+        </div> 
     </div>
     
            
