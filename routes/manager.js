@@ -19,4 +19,10 @@ router.route('/orders').get(ordersController.getAllOrders)
 router.route('/order-cancel/:id').delete(ordersController.cancelOrder)
 router.route('/order-deliver/:id').patch(ordersController.updateOrderStatus)
 
+// for statistics
+router.route('/api/orders-stats').get(ordersController.getAllOrdersStats);
+router.route('/statistics').get(ordersController.renderStatsPage);
+
+
+
 module.exports = router;

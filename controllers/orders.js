@@ -17,6 +17,25 @@ const getAllOrders = async (req, res) => {
         });
 };
 
+const getAllOrdersStats = async (req, res) => {
+    try {
+        const orders = await ordersService.getAllOrders();
+        // Aggregate monthly sales
+        const salesByMonth = {};
+        orders.forEach(order => {
+            const month = new Date(order.date).toLocaleString('default', { month: 'long' });
+            if (!salesByMonth[month]) salesByMonth[month] = 0;
+            salesByMonth[month] += order.price;
+        });
+
+        //res.json({ orders, salesByMonth });
+        res.json(orders);
+
+    } catch (error) {
+        res.status(500).send('Error fetching order statistics');
+    }
+};
+
 const updateOrderStatus = async (req, res) => {
     try {
         const order = await ordersService.updateOrderStatus(req.params.id);
@@ -38,9 +57,18 @@ const cancelOrder = async (req, res) => {
     res.send();
 };
 
+const renderStatsPage = async (req, res) => {
+    res.render('manager/statistics', {
+            username: req.session.username,
+            isAdmin: req.session.isAdmin,
+        });
+}
+
 module.exports = { 
     getMyOrders,
     getAllOrders, 
+    getAllOrdersStats,
     cancelOrder,
-    updateOrderStatus
+    updateOrderStatus,
+    renderStatsPage
 };
