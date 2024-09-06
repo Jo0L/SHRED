@@ -1,4 +1,4 @@
-// ass an item
+// add an item
 $('#add-button').click(() => { 
     $('#error-message').hide().text('');
     
@@ -46,21 +46,29 @@ $('#edit-button').click(() => {
     });
   });
 
-$('.delete-btn').on('click', function() {
-    const id = $(this).data('id');
-    if (confirm('Are you sure you want to delete this item?')) {
+  $(document).ready(() => {
+    // When the delete modal is shown
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget); 
+        const id = button.data('id'); 
+        $('#confirm-delete-button').data('id', id); // Store the ID in the delete button
+    });
+
+    // When the delete button inside the modal is clicked
+    $('#confirm-delete-button').click(function() { 
+        const id = $(this).data('id'); 
         $.ajax({
             url: `/accessories/delete/${id}`,
             type: 'DELETE',
-            success: function(result) {
-                alert('Item deleted successfully!');
+            success: () => {
+                $('#deleteModal').modal('hide');
+                alert('item deleted succesfully!');
                 window.location.reload(true);
             },
-            error: function(err) {
-                console.error(err);
-                alert('Failed to delete the item.');
+            error: (xhr, status, error) => {
+                alert('An error occurred while deleting the user: ' + error);
             }
         });
-    }
+    });
 });
 

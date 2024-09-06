@@ -15,7 +15,6 @@ const getAllUsers = async (req, res) => {
             username: req.session.username,
             isAdmin: req.session.isAdmin,
         });
-
 };
 
 const updateUser = async (req, res) => {
