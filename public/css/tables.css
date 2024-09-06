@@ -4,6 +4,7 @@ h1 {
     font-size: 48px;
     margin-top: 20px;
     text-align: center;
+    text-shadow: 0 0 3px #c2350a;
 }
 
 h1::first-letter {
