@@ -20,15 +20,6 @@ const getAllOrders = async (req, res) => {
 const getAllOrdersStats = async (req, res) => {
     try {
         const orders = await ordersService.getAllOrders();
-        // Aggregate monthly sales
-        const salesByMonth = {};
-        orders.forEach(order => {
-            const month = new Date(order.date).toLocaleString('default', { month: 'long' });
-            if (!salesByMonth[month]) salesByMonth[month] = 0;
-            salesByMonth[month] += order.price;
-        });
-
-        //res.json({ orders, salesByMonth });
         res.json(orders);
 
     } catch (error) {
