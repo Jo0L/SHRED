@@ -60,13 +60,20 @@
                 </div>
 
                 <div class="pagination">
-                    <a href="#">&laquo;</a>
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">&raquo;</a>
+                    <% if (currentPage > 1) { %>
+                        <a href="?page=<%= currentPage - 1 %>&sortBy=<%= sortBy %>&type=<%= type %>&color=<%= color %>&gender=<%= gender %>&search=<%= search %>">&laquo;</a>
+                    <% } %>
+                
+                    <% for (let i = 1; i <= totalPages; i++) { %>
+                        <a href="?page=<%= i %>&sortBy=<%= sortBy %>&type=<%= type %>&color=<%= color %>&gender=<%= gender %>&search=<%= search %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+                    <% } %>
+                
+                    <% if (currentPage < totalPages) { %>
+                        <a href="?page=<%= currentPage + 1 %>&sortBy=<%= sortBy %>&type=<%= type %>&color=<%= color %>&gender=<%= gender %>&search=<%= search %>">&raquo;</a>
+                    <% } %>
                 </div>
+                
+                
             </div>
         </div>
         <script src="/js/filter.js"></script>
