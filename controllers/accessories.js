@@ -15,6 +15,8 @@ const getAccessories = async (req, res) => {
     try {
         const type = req.params.type || 'all';
         const id = req.query.id;
+        const page = parseInt(req.query.page, 10) || 1; // Default to page 1 if no page query param
+        const limit = 9;
 
         if (id) {
             return getAccessory(req, res); // Forward to getAccessory if ID is present
@@ -22,14 +24,25 @@ const getAccessories = async (req, res) => {
 
         const capitalizedTitle = type.charAt(0).toUpperCase() + type.slice(1);
 
-        // Fetch all accessories for rendering
+        // Fetch filtered and sorted accessories
         const accessories = await accessoriesService.filterAndSortAccessories({
             type,
             gender: req.query.gender,
             sortBy: req.query.sortBy,
             search: req.query.search,
+            color: req.query.color,
+            page,
+            limit
+        });
+
+        const totalAccessories = await accessoriesService.getAccessoryCount({
+            type,
+            gender: req.query.gender,
+            search: req.query.search,
             color: req.query.color
         });
+        
+        const totalPages = Math.ceil(totalAccessories / limit);
 
         // Fetch distinct colors
         const colors = await accessoriesService.getDistinctColors();
@@ -39,7 +52,14 @@ const getAccessories = async (req, res) => {
             capitalizedTitle,
             username: req.session.username,
             isAdmin: req.session.isAdmin,
-            colors // Pass colors to the view
+            colors, // Pass colors to the view
+            currentPage: page,
+            totalPages,
+            sortBy: req.query.sortBy || '',
+            type: req.query.type || '',
+            color: req.query.color || '',
+            gender: req.query.gender || '',
+            search: req.query.search || ''
         });
 
     } catch (err) {
@@ -47,6 +67,8 @@ const getAccessories = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch accessories' });
     }
 };
+
+
 
 const getAllProducts = async (req, res) => {
     try {
@@ -99,35 +121,58 @@ const deleteAccessory = async (req, res) => {
 // Updated to use filterAndSortAccessories
 const filterAndSortAccessories = async (req, res) => {
     try {
-        const query = {
-            type: req.query.type || 'all',
-            gender: req.query.gender,
-            sortBy: req.query.sortBy,
-            search: req.query.search,
-            color: req.query.color
-        };
+        const type = req.query.type || 'all';
+        const color = req.query.color || '';
+        const gender = req.query.gender || '';
+        const sortBy = req.query.sortBy || '';
+        const search = req.query.search || '';
+        const page = parseInt(req.query.page, 10) || 1; // Default to page 1 if no page query param
+        const limit = 9;
 
-        const capitalizedTitle = query.type.charAt(0).toUpperCase() + query.type.slice(1);
+        // Fetch filtered and sorted accessories
+        const accessories = await accessoriesService.filterAndSortAccessories({
+            type,
+            gender,
+            sortBy,
+            search,
+            color,
+            page,
+            limit
+        });
 
-        const accessories = await accessoriesService.filterAndSortAccessories(query);
+        const totalAccessories = await accessoriesService.getAccessoryCount({
+            type,
+            gender,
+            search,
+            color
+        });
         
+        const totalPages = Math.ceil(totalAccessories / limit);
 
         // Fetch distinct colors
         const colors = await accessoriesService.getDistinctColors();
 
         res.status(200).render('accessories', {
             accessories,
-            capitalizedTitle,
+            capitalizedTitle: type.charAt(0).toUpperCase() + type.slice(1),
             username: req.session.username,
             isAdmin: req.session.isAdmin,
-            colors // Pass colors to the view
+            colors, // Pass colors to the view
+            currentPage: page, // Pass currentPage to the view
+            totalPages,
+            sortBy,
+            type,
+            color,
+            gender,
+            search
         });
 
     } catch (err) {
-        console.error(err); // Log the error for debugging
-        res.status(500).json({ error: 'Failed to fetch accessories' });
+        console.error(err);
+        res.status(500).json({ error: 'Failed to filter accessories' });
     }
 };
+
 
 module.exports = { 
     createAccessory, 

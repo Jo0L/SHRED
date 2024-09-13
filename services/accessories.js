@@ -61,9 +61,8 @@ const deleteAccessory = async (id) => {
     return accessory;
 };
 
-const filterAndSortAccessories = async ({ type, gender, sortBy, search, color }) => {
+const filterAndSortAccessories = async ({ type, gender, sortBy, search, color, page, limit }) => {
     try {
-        // Build query object
         let query = {};
         if (type !== 'all') query.type = type;
         if (gender) query.gender = gender;
@@ -73,17 +72,19 @@ const filterAndSortAccessories = async ({ type, gender, sortBy, search, color })
             { company: new RegExp(search, 'i') }
         ];
 
-        // Build sort options
         const sortOptions = {};
         if (sortBy === 'a-z') sortOptions.company = 1;
-        if (sortBy === 'price-asc') sortOptions.price = 1; // Low to High
-        if (sortBy === 'price-desc') sortOptions.price = -1; // High to Low
+        if (sortBy === 'price-asc') sortOptions.price = 1;
+        if (sortBy === 'price-desc') sortOptions.price = -1;
 
-        return await Accessory.find(query).sort(sortOptions);
+        const skip = (page - 1) * limit;
+        return await Accessory.find(query).sort(sortOptions).skip(skip).limit(limit);
     } catch (err) {
         throw new Error('Failed to filter and sort accessories');
     }
 };
+
+
 
 const getDistinctColors = async () => {
     try {
@@ -93,6 +94,24 @@ const getDistinctColors = async () => {
         throw new Error('Failed to retrieve distinct colors');
     }
 };
+
+const getAccessoryCount = async ({ type, gender, search, color }) => {
+    try {
+        let query = {};
+        if (type !== 'all') query.type = type;
+        if (gender) query.gender = gender;
+        if (color) query.color = color;
+        if (search) query.$or = [
+            { type: new RegExp(search, 'i') },
+            { company: new RegExp(search, 'i') }
+        ];
+
+        return await Accessory.countDocuments(query);
+    } catch (err) {
+        throw new Error('Failed to count accessories');
+    }
+};
+
 
 
 
@@ -104,5 +123,6 @@ module.exports = {
     updateAccessory, 
     deleteAccessory,
     filterAndSortAccessories,
-    getDistinctColors
+    getDistinctColors,
+    getAccessoryCount
   };
