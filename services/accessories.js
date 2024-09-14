@@ -1,21 +1,21 @@
 const Accessory = require('../models/accessories');
+const User = require('../models/user'); // Import User model
 
 const createAccessory = async (type, color, company, price, gender, img, stock) => {
     try {
         const accessory = new Accessory({
-            type, // watches / jewelry / sunglasses
+            type, 
             color,
             company,
             gender,
             price,
-            stock, // for female or male
+            stock,
             img
         });
 
         await accessory.save();
         console.log('Accessory created successfully');
         return accessory;
-
 
     } catch (error) {
         console.error('Error creating accessory:', error.message);
@@ -28,36 +28,38 @@ const getAccessoryById = async (id) => {
 };
 
 const getAccessories = async (accessoryType) => {
-    
     const type = accessoryType.toLowerCase();
- 
     if (accessoryType === 'all') {
-        // Return all accessories if type is 'all'
         return await Accessory.find();
     } else {
-        // Return accessories of the specified type
         return await Accessory.find({ type });
     }
 };
 
-// we need to think what we want to update - maybe only price? maybe 2 diffrent functions?
 const updateAccessory = async (id, color, company, price, gender, img, stock) => {
     const accessory = await getAccessoryById(id);
-    if (!accessory)
-        return null;
+    if (!accessory) return null;
     accessory.color = color;
     accessory.company = company;
     accessory.price = price;
     accessory.gender = gender;
     accessory.img = img;
     accessory.stock = stock;
-
     await accessory.save();
     return accessory;
 };
 
 const deleteAccessory = async (id) => {
+    // Step 1: Delete the accessory
     const accessory = await Accessory.findByIdAndDelete(id);
+    if (!accessory) return null;
+
+    // Step 2: Remove the accessory from all user carts
+    await User.updateMany(
+        { 'cart.accessoryId': id },
+        { $pull: { cart: { accessoryId: id } } }
+    );
+
     return accessory;
 };
 
@@ -83,8 +85,6 @@ const filterAndSortAccessories = async ({ type, gender, sortBy, search, color, p
         throw new Error('Failed to filter and sort accessories');
     }
 };
-
-
 
 const getDistinctColors = async () => {
     try {
@@ -112,10 +112,6 @@ const getAccessoryCount = async ({ type, gender, search, color }) => {
     }
 };
 
-
-
-
-
 module.exports = {
     createAccessory, 
     getAccessoryById, 
@@ -125,4 +121,4 @@ module.exports = {
     filterAndSortAccessories,
     getDistinctColors,
     getAccessoryCount
-  };
+};
