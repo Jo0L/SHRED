@@ -51,12 +51,12 @@
                                             <input type="hidden" id="type-input" name="type" value="<%= accessory.type %>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">color</label>
-                                            <input type="text" class="form-control" id="color-input" name="color" value="<%= accessory.color %>">
+                                            <label for="color">color</label>
+                                            <input type="text" class="form-control" id="color-input" name="color" value="<%= accessory.color %>" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="company">company</label>
-                                            <input type="text" class="form-control" id="company-input" name="company" value="<%= accessory.company %>">
+                                            <label for="company">brand</label>
+                                            <input type="text" class="form-control" id="company-input" name="company" value="<%= accessory.company %>" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="gender">Gender</label>
@@ -67,20 +67,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="price">Price</label>
-                                            <input type="number" class="form-control" id="price-input" name="price" step="0.01" min="0" value="<%= accessory.price %>">
+                                            <input type="number" class="form-control" id="price-input" name="price" step="0.01" min="0" value="<%= accessory.price %>" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="stock">Stock</label>
-                                            <input type="number" class="form-control" id="stock-input" name="stock" step="0" min="0" value="<%= accessory.stock %>">
+                                            <input type="number" class="form-control" id="stock-input" name="stock" step="0" min="0" value="<%= accessory.stock %>" required>
                                         </div>
-                                        <!-- TODO 
-                                        after decide how the images is saved, need to change in the form.
-                                        right now it will be a simple string.
-                                        <input type="file" class="form-control-file" id="image-input" name="image" accept="image/*">
-                                        -->
                                         <div class="form-group">
                                             <label for="image">Image</label>
-                                            <input type="text" class="form-control" id="img-input" name="img" value="<%= accessory.img %>">
+                                            <input type="text" class="form-control" id="img-input" name="img" value="<%= accessory.img %>" required>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
