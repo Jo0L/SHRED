@@ -18,17 +18,20 @@ const logout = async (req, res) => {
 
 const login = async (req, res) => {
     const { username, password } = req.body;
-    const result = await loginService.login(username, password);
-    if (result){
-        req.session.username = username;
-        req.session.isAdmin = result.isAdmin ?? false;
-
-        res.redirect('/');
-    } else {
+    try {
+        const result = await loginService.login(username, password);
+        if (result) {
+            req.session.username = username;
+            req.session.isAdmin = result.isAdmin ?? false;
+            res.redirect('/');
+        } else {
+            req.session.error = 'Username or password incorrect.';
+            res.render('login', { error: req.session.error });
+        }
+    } catch (error) {
         console.error('Login error:', error);
-
-        res.redirect('/login?error=1');
-        // TODO: toast?
+        req.session.error = 'An error occurred during login.';
+        res.render('login', { error: req.session.error });
     }
 }
 
@@ -39,9 +42,16 @@ const register = async (req, res) => {
         req.session.username = username;
         res.redirect('/');
     } catch (error) {
-        res.redirect('/register?error=1');
-        // TODO: toast?
+        if (error.code === 11000 && error.keyPattern && error.keyPattern._id) {
+            // Handle the duplicate key error (username already taken)
+            const errorMessage = 'The username is already taken.';
+            res.render('register', { error: errorMessage });
+        } else {
+            console.error('Registration error:', error);
+            const errorMessage = 'An error occurred during registration. Please try again.';
+            res.render('register', { error: errorMessage });
+        }
     }
-}
+};
 
 module.exports = { ensureAuthenticated, ensureAdmin, login, register, logout };

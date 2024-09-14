@@ -14,6 +14,7 @@
             <div class="login-form">
                 <h2 class="text-center font-weight-bold welcome-heading">Welcome to SHRED!</h2>
                 <h5 class="signin-message">sign in to continue shopping<br></h5> <!-- Added signin-message class -->
+                
                 <form method="post">
                     <div class="form-group">
                         <label for="email">Email Address</label>
@@ -28,6 +29,14 @@
                         required
                         class="form-control" id="password" placeholder="*******">
                     </div>
+
+                    <!-- error message -->
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <div class="alert alert-danger text-center">
+                            <%= error %>
+                        </div>
+                    <% } %>
+                
                     <button type="submit" class="btn btn-dark btn-block">Login</button>
                 </form>
 
