@@ -1,6 +1,5 @@
 const accessoriesService = require('../services/accessories');
 
-
 const createAccessory = async (req, res) => {
     const { type, color, company, price, gender, img, stock } = req.body;
     try {
@@ -15,16 +14,15 @@ const getAccessories = async (req, res) => {
     try {
         const type = req.params.type || 'all';
         const id = req.query.id;
-        const page = parseInt(req.query.page, 10) || 1; // Default to page 1 if no page query param
+        const page = parseInt(req.query.page, 10) || 1;
         const limit = 9;
 
         if (id) {
-            return getAccessory(req, res); // Forward to getAccessory if ID is present
+            return getAccessory(req, res);
         }
 
         const capitalizedTitle = type.charAt(0).toUpperCase() + type.slice(1);
 
-        // Fetch filtered and sorted accessories
         const accessories = await accessoriesService.filterAndSortAccessories({
             type,
             gender: req.query.gender,
@@ -44,7 +42,6 @@ const getAccessories = async (req, res) => {
         
         const totalPages = Math.ceil(totalAccessories / limit);
 
-        // Fetch distinct colors
         const colors = await accessoriesService.getDistinctColors();
 
         res.status(200).render('accessories', {
@@ -52,7 +49,7 @@ const getAccessories = async (req, res) => {
             capitalizedTitle,
             username: req.session.username,
             isAdmin: req.session.isAdmin,
-            colors, // Pass colors to the view
+            colors,
             currentPage: page,
             totalPages,
             sortBy: req.query.sortBy || '',
@@ -63,12 +60,10 @@ const getAccessories = async (req, res) => {
         });
 
     } catch (err) {
-        console.error(err); // Log the error for debugging
+        console.error(err);
         res.status(500).json({ error: 'Failed to fetch accessories' });
     }
 };
-
-
 
 const getAllProducts = async (req, res) => {
     try {
@@ -92,7 +87,7 @@ const getAccessory = async (req, res) => {
         return res.status(404).json({errors: ['Accessory not found'] }); 
     }
 
-    res.status(200).render('accessory', { accessory, username: req.session.username, isAdmin: req.session.isAdmin });;
+    res.status(200).render('accessory', { accessory, username: req.session.username, isAdmin: req.session.isAdmin });
 };
 
 const updateAccessory = async (req, res) => {
@@ -110,15 +105,17 @@ const updateAccessory = async (req, res) => {
 
 const deleteAccessory = async (req, res) => {
     const id = req.params.id;
-    const accessory = await accessoriesService.deleteAccessory(id);
-    if (!accessory) {
-        return res.status(404).json({ errors: ['Accessory not found'] }); 
+    try {
+        const accessory = await accessoriesService.deleteAccessory(id);
+        if (!accessory) {
+            return res.status(404).json({ errors: ['Accessory not found'] }); 
+        }
+        res.status(200).json({ message: 'Accessory successfully removed' });
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to delete accessory' });
     }
-
-    res.send();
 };
 
-// Updated to use filterAndSortAccessories
 const filterAndSortAccessories = async (req, res) => {
     try {
         const type = req.query.type || 'all';
@@ -126,10 +123,9 @@ const filterAndSortAccessories = async (req, res) => {
         const gender = req.query.gender || '';
         const sortBy = req.query.sortBy || '';
         const search = req.query.search || '';
-        const page = parseInt(req.query.page, 10) || 1; // Default to page 1 if no page query param
+        const page = parseInt(req.query.page, 10) || 1;
         const limit = 9;
 
-        // Fetch filtered and sorted accessories
         const accessories = await accessoriesService.filterAndSortAccessories({
             type,
             gender,
@@ -149,7 +145,6 @@ const filterAndSortAccessories = async (req, res) => {
         
         const totalPages = Math.ceil(totalAccessories / limit);
 
-        // Fetch distinct colors
         const colors = await accessoriesService.getDistinctColors();
 
         res.status(200).render('accessories', {
@@ -157,8 +152,8 @@ const filterAndSortAccessories = async (req, res) => {
             capitalizedTitle: type.charAt(0).toUpperCase() + type.slice(1),
             username: req.session.username,
             isAdmin: req.session.isAdmin,
-            colors, // Pass colors to the view
-            currentPage: page, // Pass currentPage to the view
+            colors,
+            currentPage: page,
             totalPages,
             sortBy,
             type,
@@ -172,7 +167,6 @@ const filterAndSortAccessories = async (req, res) => {
         res.status(500).json({ error: 'Failed to filter accessories' });
     }
 };
-
 
 module.exports = { 
     createAccessory, 
