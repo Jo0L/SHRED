@@ -67,3 +67,8 @@ body {
     color: #fff;
     border-width: 0px;
 }
+
+@font-face {
+    font-family: SHREAD;
+    src: url(sansation_light.woff);
+}

@@ -1,10 +1,22 @@
 .about-section {
-    text-align: center;
-    padding: 20px;
+    text-align: left;
+    padding: 5% 15%;
+}
+
+.about-video {
+    display: flex;
+    justify-content: center;
+    padding-block: 2%;
+}
+
+.about-section h1 {
+    color: #c94b25;
 }
 
 .about-section h2 {
     margin-top: 30px;
+    color: #c94b25;
+    font-weight: 500;
 }
 
 .about-section ul {
@@ -14,6 +26,12 @@
 
 .about-section ul li {
     margin-bottom: 10px;
+}
+
+.visit-us {
+    text-align: center;
+    margin-top: 100px;
+    border-top: 1px solid;
 }
 
 .map-section {
