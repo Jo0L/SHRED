@@ -9,14 +9,21 @@
     font-size: 200%;
     margin-bottom: 3vh;
     border-bottom: 1.5px solid #cccccce3;
-    font-family: 'Newsreader';
+    font-family: SHREAD;
 }
-
+  
 .cart-container h1 span {
     font-weight: normal;
     font-size: 50%;
     color: #4e4c4c;
     padding: 0 1%;
+}
+
+.cart-container h1 span span {
+    font-weight: normal;
+    font-size: 90%;
+    color: #4e4c4c;
+    padding: 0 0.1%;
 }
 
 .cart-wrapper {
@@ -169,4 +176,9 @@
     color: #c94b25;
     border: 1px solid #c94b25 ;
     transition: all ease 0.5s;
+}
+
+@font-face {
+    font-family: SHREAD;
+    src: url(sansation_light.woff);
 }

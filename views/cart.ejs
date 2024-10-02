@@ -8,7 +8,7 @@
 
     <body>
         <div class="cart-container">
-            <h1>Cart <span> <%= (cart.length) %> items</span></h1>
+            <h1>Cart <span> <span id="item_amount"> <%= cart.reduce((total, item) => total + item.quantity, 0) %> </span> Items</span></h1>
             
             <div class="cart-wrapper">
                 <div class="cart-items">
@@ -24,10 +24,10 @@
                                 <div class="item-details">
                                     <div class="item-details-title">
                                         <h2><%= item.title %></h2>
-                                        <h2>$<%= item.price * item.quantity %></h2>
+                                        <h2 id="calculate_price-<%= item.accessoryId %>">$<%= item.price * item.quantity %></h2>
                                     </div>
                 
-                                    <p class="price">$<%= item.price %></p>
+                                    <p id="item_price-<%= item.accessoryId %>" class="price">$<%= item.price %></p>
                                     
                                     <div class="item-controls">
                                         <div class="quantity-controls">
@@ -46,13 +46,13 @@
                     <% } %>
                 </div>
             
-                <div class="order-summary">
+                <aside class="order-summary">
                     <% if (cart.length > 0) { %>
                         <h3>Order summary</h3>
-                        <p>Subtotal: <span>$<%= subtotal.toFixed(2) %></span></p>
-                        <p>Shipping: <span>$<%= shipping.toFixed(2) %></span></p>
-                        <p>Tax: <span><%= tax %></span></p>
-                        <p class="total">Total: <span>$<%= total.toFixed(2) %></span></p>
+                        <p>Subtotal: <span id="subtotal">$<%= subtotal.toFixed(2) %></span></p>
+                        <p>Shipping: <span id="shipping">$<%= shipping.toFixed(2) %></span></p>
+                        <p>Tax: <span id="tax"><%= tax %></span></p>
+                        <p class="total">Total: <span id="total">$<%= total.toFixed(2) %></span></p>
                         <button class="payment-btn">continue to payment</button>
                     <% } else { %>
                         <h3>Order summary</h3>
@@ -62,7 +62,7 @@
                         <p class="total">Total: <span>$0</span></p>
                         <button class="payment-btn" disabled>continue to payment</button>
                     <% } %>
-                </div>
+                </aside>
             </div>
         </div>
         

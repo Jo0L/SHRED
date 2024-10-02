@@ -3,7 +3,12 @@ const accessoriesService = require('../services/accessories');
 const createAccessory = async (req, res) => {
     const { type, color, company, price, gender, img, stock } = req.body;
     try {
+        // Create the new product in the DB
         const newAccessory = await accessoriesService.createAccessory(type, color, company, price, gender, img, stock);
+        
+        // Upload a post to our facebook page about the new product
+        uploadToFacebookNewPost(type, color, company, price, gender, img);
+        
         res.status(201).json(newAccessory);
     } catch (err) {
         res.status(500).json({ error: 'Failed to create accessory' });
@@ -167,6 +172,31 @@ const filterAndSortAccessories = async (req, res) => {
         res.status(500).json({ error: 'Failed to filter accessories' });
     }
 };
+
+
+// Upload post to facebook 
+async function uploadToFacebookNewPost(type, color, company, price, gender, img) {
+    // Create Facebook post content
+    const message = `
+        A new product has been uploaded to our website:
+        - Product: ${type} (${color})
+        - Company: ${company}
+        - Price: $${price}
+        - Gender: ${gender}
+    `;
+
+    // Post to Facebook (using Graph API)
+    const facebookPageId = 'YOUR_PAGE_ID'; // Replace with your Facebook Page ID
+    const accessToken = 'YOUR_PAGE_ACCESS_TOKEN'; // Replace with your Page Access Token
+    const url = `https://graph.facebook.com/${facebookPageId}/photos`;
+
+    // Facebook API call to post the image and product details
+    await axios.post(url, {
+        url: img, // URL of the product image
+        caption: message, // Description of the product
+        access_token: accessToken, // Your Facebook Page Access Token
+    });
+}
 
 module.exports = { 
     createAccessory, 
