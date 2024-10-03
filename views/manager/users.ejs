@@ -3,7 +3,8 @@
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <%- include('../include/_header') %>
-    <link rel="stylesheet" href="/css/tables.css"> 
+    <link rel="stylesheet" href="/css/tables.css">
+    <link rel="stylesheet" href="/css/manager.css"> 
 </head>
 <body>
     <div class="container-fluid">
@@ -12,9 +13,31 @@
                 <h1>All Users </h1>
     
                 <hr>
-    
+
+                <div class="filter-bar">
+                    <input type="text" id="search" class="search-bar" placeholder="Search user" />
+                
+                    <div class="filter-section">
+                        <select id="isAdmin" class="filter-dropdown">
+                            <option value="">isAdmin</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    
+                        <select id="gender" class="filter-dropdown">
+                            <option value="">Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Rather not say">Rather not say</option>
+                        </select>
+                    </div>
+                
+                    <button id="applyFiltersBtn">Apply Filters</button>
+                    <button id="resetFiltersBtn" class="reset-btn">Reset Filters</button>
+                </div>
+
                 <div class="table-container">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover" id="usersTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Email</th>
@@ -28,7 +51,7 @@
                         </thead>
                         <tbody>
                             <% users.forEach(user => { %>
-                                <tr>
+                                <tr class="user-row">
                                     <td><%= user._id %></td>
                                     <td><%= user.firstName %></td>
                                     <td><%= user.lastName %></td>
@@ -44,7 +67,6 @@
                                         <% } else { %>
                                             <h5><span class="badge badge-secondary">Cannot modify own status</span></h5>
                                         <% } %>
-                        
                                     </td>
                                 </tr>
                             <% }) %>
@@ -52,7 +74,8 @@
                     </table>
                 </div>
             </div>
-        </div>  
+        </div>
+
         <!-- Delete Confirmation Modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -74,7 +97,6 @@
             </div> 
         </div> 
     </div>
-           
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
