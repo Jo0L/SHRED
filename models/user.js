@@ -7,7 +7,6 @@ const User = new Schema({
     lastName: String,
     gender: { type: String, enum: ['Male', 'Female', 'Rather not say'], required: true },
     address: String,
-    //mail: String,
     whishlist: Array,
     isAdmin: Boolean,
     cart: [
@@ -19,7 +18,9 @@ const User = new Schema({
             img: String,
             addedAt: Date
         }
-    ]
+    ],
+    resetPasswordToken: String, // Token to reset the password
+    resetPasswordExpires: Date // Token expiration time
 });
 
 module.exports = model('users', User);

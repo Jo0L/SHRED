@@ -54,4 +54,57 @@ const register = async (req, res) => {
     }
 };
 
-module.exports = { ensureAuthenticated, ensureAdmin, login, register, logout };
+const forgotPassword = async (req, res) => {
+    const { username } = req.body;
+    try {
+        // Send user a reset email
+        const result = await loginService.sendResetEmailToUser(username);
+        
+        if(result === "404") {
+            req.session.error = 'There is no user with this email.';
+            return res.render('forgot-password', { error: req.session.error });
+        }
+
+        if(result) {
+            req.session.success = 'Password reset email sent.';
+            res.render('forgot-password', { success: req.session.success });
+        }
+        else {
+            req.session.error = 'Failed to send password reset email.';
+            res.render('forgot-password', { error: req.session.error });
+        }
+
+    } catch (err) {
+        req.session.error = 'Failed to send password reset email.';
+        res.render('forgot-password', { error: req.session.error });
+    }
+};
+
+const resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+    
+    if(!newPassword) {
+        res.render('reset-password', { message: 'Please enter new password.' });
+    }
+    else {
+        try {
+            const result = await loginService.resetPassword(token, newPassword);
+          
+            if(result) {
+                req.session.success = 'Password has been reset.';
+                res.render('reset-password', { success: req.session.success });
+            }
+            else {
+                req.session.error = 'Invalid or expired token.';
+                res.render('reset-password', { error: req.session.error });
+            }
+
+        } catch (err) {
+            req.session.error = 'Failed to reset password.';
+            res.render('reset-password', { error: req.session.error });
+        }
+    }
+};
+
+module.exports = { ensureAuthenticated, ensureAdmin, login, forgotPassword, resetPassword, register, logout };
