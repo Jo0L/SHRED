@@ -7,7 +7,7 @@ const createAccessory = async (req, res) => {
         const newAccessory = await accessoriesService.createAccessory(type, color, company, price, gender, img, stock);
         
         // Upload a post to our facebook page about the new product
-        uploadToFacebookNewPost(type, color, company, price, gender, img);
+        // uploadToFacebookNewPost(type, color, company, price, gender, img);
         
         res.status(201).json(newAccessory);
     } catch (err) {
