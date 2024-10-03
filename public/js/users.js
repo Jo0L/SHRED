@@ -49,3 +49,44 @@ $(document).ready(() => {
         });
     });
 });
+
+// Filtration logic
+$(document).ready(function() {
+    // Apply filters when the button is clicked
+    $('#applyFiltersBtn').click(function() {
+        filterUsers();
+    });
+
+    // Reset filters when the reset button is clicked
+    $('#resetFiltersBtn').click(function() {
+        $('#search').val('');
+        $('#isAdmin').val('');
+        $('#gender').val('');
+        filterUsers();  // Apply empty filters to reset
+    });
+
+    // Filter users based on search and dropdown values
+    function filterUsers() {
+        const searchValue = $('#search').val().toLowerCase();
+        const isAdminValue = $('#isAdmin').val();
+        const genderValue = $('#gender').val();
+
+        $('.user-row').each(function() {
+            const email = $(this).find('td').eq(0).text().toLowerCase();
+            const firstName = $(this).find('td').eq(1).text().toLowerCase();
+            const lastName = $(this).find('td').eq(2).text().toLowerCase();
+            const gender = $(this).find('td').eq(3).text();
+            const isAdmin = $(this).find('td').eq(5).text().toLowerCase() === 'yes' ? 'true' : 'false';
+
+            const matchesSearch = email.includes(searchValue) || firstName.includes(searchValue) || lastName.includes(searchValue);
+            const matchesAdmin = isAdminValue === '' || isAdmin === isAdminValue;
+            const matchesGender = genderValue === '' || gender === genderValue;
+
+            if (matchesSearch && matchesAdmin && matchesGender) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+});
