@@ -90,7 +90,6 @@ const resetPassword = async (req, res) => {
     else {
         try {
             const result = await loginService.resetPassword(token, newPassword);
-          
             if(result) {
                 req.session.success = 'Password has been reset.';
                 res.render('reset-password', { success: req.session.success });

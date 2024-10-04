@@ -10,7 +10,7 @@ const getCart = async (req, res) => {
 
     try {
         const cart = await cartService.getCart(username);
- 
+
         if (cart) {
             // Calculate totals
             let subtotal = 0;
@@ -92,7 +92,7 @@ const deleteItem = async (req, res) => {
     }
     try {
         const cart = await cartService.deleteItem(username, accessoryId);
-      
+
         if (cart) {
             res.status(200).json({ success: true, message: 'Item was deleted successfully' });
         }

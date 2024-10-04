@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    font-family: 'SHREAD', sans-serif;
+    background-color: #f9f9f9;
+}
+
+.success-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin: 10px;
+}
+
+.success-container h1 {
+    font-size: 300%;
+    color: #4CAF50; /* Green color */
+    margin-bottom: 20px;
+}
+
+.success-container p {
+    font-size: 120%;
+    color: #333;
+    margin: 10px 0;
+}
+
+.fireworks-gif {
+    width: 50%; /* Adjust the size as needed */
+    max-width: 500px;
+    margin: 20px 0;
+}
+
+.back-home-btn {
+    background-color: #c94b25; /* Button color */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 120%;
+    transition: background-color 0.3s ease;
+}
+
+.back-home-btn:hover {
+    background-color: #4CAF50; /* Change color on hover */
+    transition: background-color 0.3s ease;
+}
+
+@font-face {
+    font-family: 'SHREAD';
+    src: url(sansation_light.woff);
+}

@@ -9,6 +9,7 @@ const users = require('./routes/users')
 const orders = require('./routes/orders')
 const cart = require('./routes/cart')
 const manager = require('./routes/manager')
+const paymentRoutes = require('./routes/payment'); 
 
 
 const { ensureAuthenticated, ensureAdmin } = require('./controllers/login')
@@ -41,6 +42,7 @@ server.use('/users', users);
 server.use('/cart', cart);
 server.use('/orders', orders);
 server.use('/manager', manager);
+server.use('/', paymentRoutes);
 
 // static HTML with and without its suffix
 server.use(express.static('public'))

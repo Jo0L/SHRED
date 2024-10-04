@@ -53,7 +53,7 @@
                         <p>Shipping: <span id="shipping">$<%= shipping.toFixed(2) %></span></p>
                         <p>Tax: <span id="tax"><%= tax %></span></p>
                         <p class="total">Total: <span id="total">$<%= total.toFixed(2) %></span></p>
-                        <button class="payment-btn">continue to payment</button>
+                        <a href="/payment" class="payment-btn">continue to payment</a>
                     <% } else { %>
                         <h3>Order summary</h3>
                         <p>Subtotal: <span>$0</span></p>
@@ -63,6 +63,7 @@
                         <button class="payment-btn" disabled>continue to payment</button>
                     <% } %>
                 </aside>
+                
             </div>
         </div>
         

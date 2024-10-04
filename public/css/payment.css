@@ -1,0 +1,98 @@
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2% 4.5%;
+    background-color: #f9f9f9;
+}
+
+.cart-container h1 {
+    font-size: 200%;
+    margin-bottom: 3vh;
+    border-bottom: 1.5px solid #cccccce3;
+    font-family: SHREAD;
+}
+
+.cart-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 4%;
+}
+
+.order-summary {
+    background-color: #eef6f6;
+    border-radius: 12px;
+    padding: 2%;
+    height: fit-content;
+    width: 30%;
+    border: 1.5px solid #dcdadae3;
+}
+
+.order-summary h3 {
+    font-size: 100%;
+    margin: 0;
+}
+
+.order-summary p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 92%;
+}
+
+.order-summary .total {
+    font-size: 105%;
+    color: #333;
+    font-weight: bold;
+}
+
+.payment-details {
+    background-color: #eef6f6;
+    border-radius: 12px;
+    padding: 2%;
+    height: fit-content;
+    width: 65%;
+    border: 1.5px solid #dcdadae3;
+}
+
+.payment-details h3 {
+    font-size: 100%;
+    margin-bottom: 1vh;
+}
+
+.form-group {
+    margin-bottom: 1.5vh;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5vh;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5vh;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.payment-btn {
+    background-color: #c94b25;
+    color: #fff;
+    padding: 4%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+}
+
+.payment-btn:hover {
+    background-color: #fff;
+    color: #c94b25;
+    border: 1px solid #c94b25;
+    transition: all ease 0.5s;
+}
+
+@font-face {
+    font-family: SHREAD;
+    src: url(sansation_light.woff);
+}
