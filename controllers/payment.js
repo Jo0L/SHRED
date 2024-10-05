@@ -18,17 +18,16 @@ const getPaymentDetails = async (req, res) => {
                 subtotal += item.price * item.quantity; // Calculate subtotal
             });
 
-            const shipping = 3.99; // Fixed shipping cost
-            const taxRate = 0.17; // Tax rate (17%)
+            const shipping = 3.99;
+            const taxRate = 0.17; 
             const tax = (subtotal * taxRate).toFixed(2); // Calculate tax
             const total = (subtotal + shipping + parseFloat(tax)).toFixed(2); // Calculate total including tax and shipping
 
-            // Render the payment page with necessary variables
             res.status(200).render('payment', { 
                 cart, 
                 username, 
                 isAdmin, 
-                subtotal: subtotal.toFixed(2), // Format subtotal to 2 decimal places
+                subtotal: subtotal.toFixed(2), 
                 shipping: shipping.toFixed(2), 
                 tax, 
                 total 
@@ -60,5 +59,5 @@ const confirmPayment = async (req, res) => {
 // Export the controller functions
 module.exports = {
     getPaymentDetails,
-    confirmPayment // Add the confirmPayment function to exports
+    confirmPayment
 };

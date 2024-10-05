@@ -1,5 +1,26 @@
 const Order = require('../models/order');
-//const { find } = require('../models/user');
+
+const createOrder = async (user, items, price, amount, paymentData, status) => {
+
+    try {
+        const order = new Order({
+            user,
+            date: new Date(),
+            price,
+            amount,
+            items,
+            paymentData,
+            status,
+        })
+        await order.save();
+
+        return true;
+    }
+    catch (error) {
+        console.error('Error adding to cart:', error);
+        return false;
+    }
+};
 
 const getOrdersByUser = async (user) => {
     return await Order.find({user});
@@ -28,5 +49,6 @@ module.exports = {
     getOrdersByUser, 
     getAllOrders,
     cancelOrder,
-    updateOrderStatus
+    updateOrderStatus,
+    createOrder
 };
