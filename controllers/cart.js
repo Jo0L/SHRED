@@ -1,4 +1,5 @@
 const cartService = require('../services/cart');
+const orderService = require('../services/orders');
 
 const getCart = async (req, res) => {
     const username = req.session.username;
@@ -10,6 +11,7 @@ const getCart = async (req, res) => {
 
     try {
         const cart = await cartService.getCart(username);
+        const orders = await orderService.getOrdersByUser(username);
 
         if (cart) {
             // Calculate totals
@@ -23,7 +25,7 @@ const getCart = async (req, res) => {
             const taxRate = 0.17;
             const total = (subtotal + shipping) * (1 + taxRate);
 
-            res.status(200).render('cart', { cart, username: req.session.username, isAdmin: req.session.isAdmin, subtotal, shipping, tax, total });
+            res.status(200).render('cart', { cart, orders, username: req.session.username, isAdmin: req.session.isAdmin, subtotal, shipping, tax, total });
         }
         else {
             res.status(401).json({ success: false, message: 'Something went wrong - user doesnt exists' });
@@ -105,7 +107,19 @@ const deleteItem = async (req, res) => {
 };
 
 const clearCart = async (req, res) => {
+    const username = req.session.username;
 
+    if (!username) {
+        res.status(401).json({ success: false, message: 'No user is authonticated', localUser: true });
+        return;
+    }
+
+    try {
+        await cartService.clearCart(username);
+    }
+    catch (error) {
+        throw error
+    }
 };
 
 

@@ -30,7 +30,7 @@ server.use('/manager', require('./routes/login'));
 // Define Middleware for '/manager' and all its sub-routes
 server.use('/manager', ensureAdmin, (req, res, next) => next());
 
-['/account', '/cart'].forEach(page => {
+['/account', '/cart', '/payment', '/payment-success'].forEach(page => {
     server.use(page, require('./routes/login'));
     server.get(page, ensureAuthenticated, (req, res, next) => next());
 })

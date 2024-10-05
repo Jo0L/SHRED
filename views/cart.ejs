@@ -66,6 +66,70 @@
                 
             </div>
         </div>
+
+        <div class="orders-wrapper">
+            <h1>Your orders <span> <%= orders.length %> orders </span></h1>
+            
+            <div class="orders-status-wrapper">
+                <div class="orders-status-item">
+                    <h2>Proccessing</h2>
+                    
+                    <div class="cart-wrapper">
+                        <div class="orders-items">
+                            <% if (orders.filter(order => order.status === 'Processing').length === 0) { %>
+                                <p>There are no proccessing orders.</p>
+                            <% } else { %>
+                                <% orders.filter(order => order.status === 'Processing').sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(order => { %>
+                                    <div class="order">
+                                        <p><%= order.date.toString().split(' ').slice(0, 4).join(' '); %></p>
+                                        <% order.items.forEach(item => { %>
+                                            <div class="order-item">
+                                                <h2><%= item.title %> <span>X <%= item.quantity %></span></h2>
+                                                <div class="img-details">
+                                                    <img src="<%= item.img %>" alt="<%= item.title %>">
+                                                </div>
+                                                <h3>$<%= item.totalPrice %></h3>
+                                               
+                                            </div>
+                                        <% }); %>
+                                    </div>
+                                <% }); %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="devaidor"></div>
+
+                <div class="orders-status-item">
+                    <h2>Delivered</h2>
+                    
+                    <div class="cart-wrapper">
+                        <div class="orders-items">
+                            <% if (orders.filter(order => order.status === 'Delivered').length === 0) { %>
+                                <p>There are no delivered orders.</p>
+                            <% } else { %>
+                                <% orders.filter(order => order.status === 'Delivered').sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(order => { %>
+                                    <div class="order">
+                                        <p><%= order.date.toString().split(' ').slice(0, 4).join(' '); %></p>
+                                        <% order.items.forEach(item => { %>
+                                            <div class="order-item">
+                                                <h2><%= item.title %> <span>X <%= item.quantity %></span></h2>
+                                                <div class="img-details">
+                                                    <img src="<%= item.img %>" alt="<%= item.title %>">
+                                                </div>
+                                                <h3>$<%= item.totalPrice %></h3>
+                                               
+                                            </div>
+                                        <% }); %>
+                                    </div>
+                                <% }); %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
