@@ -13,7 +13,7 @@ const cart = require('./routes/cart')
 const wishlist = require('./routes/wishlist')
 const manager = require('./routes/manager')
 const paymentRoutes = require('./routes/payment'); 
-
+const location = require('./routes/location'); 
 
 const { ensureAuthenticated, ensureAdmin } = require('./controllers/login')
 
@@ -45,6 +45,7 @@ server.use('/users', users);
 server.use('/cart', cart);
 server.use('/wishlist', wishlist);
 server.use('/orders', orders);
+server.use('/location', location);
 server.use('/manager', manager);
 server.use('/', paymentRoutes);
 
