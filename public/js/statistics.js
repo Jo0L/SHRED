@@ -2,10 +2,7 @@ fetch('/manager/api/orders-stats')
   .then(response => response.json())
   .then(data => {
         // ---- PIE CHART ----
-        const statusCounts = { Delivered: 0, Processing: 0 };
-        data.forEach(order => {
-            statusCounts[order.status]++;
-        });
+        const dataReady = data["statusCount"].map(a => Object.values(a));
 
         const width = 320, height = 320, margin = 20;
         const radius = Math.min(width, height) / 2 - margin;
@@ -17,7 +14,6 @@ fetch('/manager/api/orders-stats')
             .append("g")
             .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-        const dataReady = Object.entries(statusCounts);
 
         const color = d3.scaleOrdinal()
         .domain(dataReady)
@@ -63,26 +59,9 @@ fetch('/manager/api/orders-stats')
         .style("font-size", "12px")
         .style("box-shadow", "0px 0px 10px rgba(0, 0, 0, 0.1)");
 
+        
         // ---- BAR CHART ---- Monthly Sales
-        const salesByMonthYear = {};
-        data.forEach(order => {
-        const date = new Date(order.date);
-        const month = date.toLocaleString('en-US', { month: 'long' });
-        const year = date.getFullYear();
-        const key = `${month} ${year}`;
-
-        if (!salesByMonthYear[key]) {
-            salesByMonthYear[key] = 0;
-        }
-        salesByMonthYear[key] += order.price;
-        });
-
-        // Sorting the sales data by month and year
-        const salesData = Object.entries(salesByMonthYear).sort((a, b) => {
-        const dateA = new Date(a[0]);
-        const dateB = new Date(b[0]);
-        return dateA - dateB; // Sort by date in ascending order
-        });
+        const salesData = data["mounthSale"].map(a => Object.values(a));
 
         const barWidth = 250, barHeight = 250, barMargin = { top: 20, right: 30, bottom: 80, left: 60 };
         const svgBar = d3.select("#monthly-sales-chart")
@@ -99,12 +78,7 @@ fetch('/manager/api/orders-stats')
 
         svgBar.append("g")
         .attr("transform", `translate(0,${barHeight})`)
-        .call(d3.axisBottom(x)
-            .tickFormat(d => {
-            const parts = d.split(' ');
-            return `${parts[0]} ${parts[1]}`;
-            })
-        )
+        .call(d3.axisBottom(x))
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-45)")
         .style("text-anchor", "end");
@@ -160,22 +134,10 @@ fetch('/manager/api/orders-stats')
         .style("text-anchor", "middle")
         .text("Sales Amount ($)");
 
+
         // ---- LINE CHART ---- Orders over time
-        const ordersByMonthYear = {};
-        data.forEach(order => {
-          const date = new Date(order.date);
-          const month = date.toLocaleString('en-US', { month: 'long' });
-          const year = date.getFullYear();
-          const key = `${month} ${year}`;
-    
-          if (!ordersByMonthYear[key]) {
-            ordersByMonthYear[key] = 0;
-          }
-          ordersByMonthYear[key]++;
-        });
-    
-        const orderTrendsData = Object.entries(ordersByMonthYear).sort((a, b) => new Date(a[0]) - new Date(b[0]));
-    
+        const orderTrendsData = data["dailyOrder"].map(a => Object.values(a));
+   
         const trendWidth = 250, trendHeight = 250, trendMargin = { top: 20, right: 30, bottom: 80, left: 60 };
         const svgTrend = d3.select("#accessory-sales-chart")  // Using same chart container
           .append("svg")
@@ -194,12 +156,7 @@ fetch('/manager/api/orders-stats')
     
         svgTrend.append("g")
           .attr("transform", `translate(0,${trendHeight})`)
-          .call(d3.axisBottom(xTrend)
-            .tickFormat(d => {
-              const parts = d.split(' ');
-              return `${parts[0]} ${parts[1]}`;
-            })
-          )
+          .call(d3.axisBottom(xTrend))
           .selectAll("text")
           .attr("transform", "translate(-10,0)rotate(-45)")
           .style("text-anchor", "end");

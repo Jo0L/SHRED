@@ -88,8 +88,8 @@ const getAllOrders = async (req, res) => {
 
 const getAllOrdersStats = async (req, res) => {
     try {
-        const orders = await ordersService.getAllOrders();
-        res.json(orders);
+        const orders = await ordersService.getAllOrdersStats();
+        res.json(orders[0]);
 
     } catch (error) {
         res.status(500).send('Error fetching order statistics');

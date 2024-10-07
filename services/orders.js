@@ -30,6 +30,47 @@ const getAllOrders = async () => {
     return await Order.find()
 };
 
+const getAllOrdersStats = async () => {
+    return await Order.aggregate([{
+        $facet: {
+            statusCount: [{
+                $group: {
+                    _id: "$status",
+                    count: {$sum: 1}
+                }
+            }],
+            mounthSale: [{
+                $group: {
+                    _id: {
+                        $dateToString: {
+                            format: "%Y-%m",
+                            date: "$date"
+                        }
+                    },
+                    price: { $sum: "$price" },
+                }
+            },
+            {
+                $sort: { "_id": 1 } // Sort by date
+            }],
+            dailyOrder: [{
+                $group: {
+                    _id: {
+                        $dateToString: {
+                            format: "%Y-%m-%d",
+                            date: "$date"
+                        }
+                    },
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { "_id": 1 } // Sort by date
+            }]
+        }
+    }]);
+};
+
 const cancelOrder = async (id) => {
     const order = await Order.findByIdAndDelete(id);
     return order;
@@ -50,5 +91,6 @@ module.exports = {
     getAllOrders,
     cancelOrder,
     updateOrderStatus,
-    createOrder
+    createOrder,
+    getAllOrdersStats
 };
