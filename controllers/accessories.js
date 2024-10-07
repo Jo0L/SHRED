@@ -1,4 +1,5 @@
 const accessoriesService = require('../services/accessories');
+const axios = require('axios');
 
 const createAccessory = async (req, res) => {
     const { type, color, company, price, gender, img, stock } = req.body;
@@ -7,7 +8,7 @@ const createAccessory = async (req, res) => {
         const newAccessory = await accessoriesService.createAccessory(type, color, company, price, gender, img, stock);
         
         // Upload a post to our facebook page about the new product
-        // uploadToFacebookNewPost(type, color, company, price, gender, img);
+        uploadToFacebookNewPost(type, color, company, price, gender, img);
         
         res.status(201).json(newAccessory);
     } catch (err) {
@@ -17,7 +18,7 @@ const createAccessory = async (req, res) => {
 
 const getAccessories = async (req, res) => {
     try {
-        const type = req.params.type || 'all';
+        const type = req.params.type || 'accessories';
         const id = req.query.id;
         const page = parseInt(req.query.page, 10) || 1;
         const limit = 9;
@@ -72,7 +73,7 @@ const getAccessories = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
     try {
-        const type = 'all';
+        const type = 'accessories';
         const accessories = await accessoriesService.getAccessories(type);
         res.status(200).render('manager/products', {
             accessories,
@@ -123,7 +124,7 @@ const deleteAccessory = async (req, res) => {
 
 const filterAndSortAccessories = async (req, res) => {
     try {
-        const type = req.query.type || 'all';
+        const type = req.query.type || 'accessories';
         const color = req.query.color || '';
         const gender = req.query.gender || '';
         const sortBy = req.query.sortBy || '';
@@ -173,7 +174,6 @@ const filterAndSortAccessories = async (req, res) => {
     }
 };
 
-
 // Upload post to facebook 
 async function uploadToFacebookNewPost(type, color, company, price, gender, img) {
     // Create Facebook post content
@@ -186,16 +186,21 @@ async function uploadToFacebookNewPost(type, color, company, price, gender, img)
     `;
 
     // Post to Facebook (using Graph API)
-    const facebookPageId = 'YOUR_PAGE_ID'; // Replace with your Facebook Page ID
-    const accessToken = 'YOUR_PAGE_ACCESS_TOKEN'; // Replace with your Page Access Token
+    const facebookPageId = process.env.FACEBOOK_PAGE_ID;
+    const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
     const url = `https://graph.facebook.com/${facebookPageId}/photos`;
 
-    // Facebook API call to post the image and product details
-    await axios.post(url, {
-        url: img, // URL of the product image
-        caption: message, // Description of the product
-        access_token: accessToken, // Your Facebook Page Access Token
-    });
+    try {
+        // Facebook API call to post the image and product details
+        await axios.post(url, {
+            url: img, // URL of the product image
+            message: message, // Description of the product
+            access_token: accessToken, // Your Facebook Page Access Token
+        });
+
+    } catch (error) {
+        throw error
+    }
 }
 
 module.exports = { 
