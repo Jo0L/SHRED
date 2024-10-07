@@ -3,6 +3,7 @@
     <head>
         <%- include('include/_header') %>
         <link rel="stylesheet" href="/css/about.css">
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvTNYQ2xV3UlumVLZWea9RxFpdt1lK1XE&callback=initMap" async defer></script> -->
     </head>
     <body>
         <main> 
@@ -42,13 +43,17 @@
                     <h1>Visit Us</h1>
                     <p>
                         Be'er Sheva, Israel<br>
+                        Tel Aviv, Israel<br>
                     </p>
                 </div>
             </section>
 
             <section class="map-section">
-                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ObVLzFURiZK3tSlFRPJIExZY6TfKr94&ehbc=2E312F&noprof=1" width="400" height="600" style="border:2;" allowfullscreen="" loading="lazy"></iframe>
+                <div id="map" style="height: 600px; width: 100%; border: 2px solid black;"></div>
             </section>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="/js/location.js"></script>
         </main>
         <%- include('include/_footer') %>
     </body>
