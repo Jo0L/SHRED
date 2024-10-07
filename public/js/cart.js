@@ -178,3 +178,39 @@ function updateSummaryPrices(data) {
     $(`#subtotal`).text("$" + (subtotal.toFixed(2)));
     $(`#total`).text("$" + (total.toFixed(2)));
 }
+
+
+// On load get wishlist
+$(document).ready(async function () {
+    try {
+        const response = await $.ajax({
+            url: '/wishlist/getWishlist',
+            type: 'GET',
+        });
+
+        if (response.wishlistData) {
+            const wishlist = response.wishlistData; // Save the wishlist data in a variable
+            
+            // Iterate through the wishlist and create divs with the contents
+            wishlist.forEach(item => {
+                const wishlistItemDiv = `
+                    <a href="/accessories/${item.type}/?id=${item.id}" class="wishlist-item">
+                        <img src="${item.img}" alt="${item.title}" class="wishlist-item-image"/>
+                    </a>
+                `;
+
+                // Append the div to a wrapper
+                $('#wishlist-container').append(wishlistItemDiv);
+            });
+
+            if(response.wishlistData.length===0) {
+                const noItemsMessage = `
+                    <p>Your wishlist is empty.</p>
+                `;
+                $('#wishlist-container').append(noItemsMessage);
+            }
+        }
+    } catch (error) {
+        console.error('Error getting wishlist:', error);
+    }
+});
