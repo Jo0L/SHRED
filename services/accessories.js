@@ -29,7 +29,7 @@ const getAccessoryById = async (id) => {
 
 const getAccessories = async (accessoryType) => {
     const type = accessoryType.toLowerCase();
-    if (accessoryType === 'all') {
+    if (accessoryType === 'accessories') {
         return await Accessory.find();
     } else {
         return await Accessory.find({ type });
@@ -66,7 +66,7 @@ const deleteAccessory = async (id) => {
 const filterAndSortAccessories = async ({ type, gender, sortBy, search, color, page, limit }) => {
     try {
         let query = {};
-        if (type !== 'all') query.type = type;
+        if (type !== 'accessories') query.type = type;
         if (gender) query.gender = gender;
         if (color) query.color = color;
         if (search) query.$or = [
@@ -98,7 +98,7 @@ const getDistinctColors = async () => {
 const getAccessoryCount = async ({ type, gender, search, color }) => {
     try {
         let query = {};
-        if (type !== 'all') query.type = type;
+        if (type !== 'accessories') query.type = type;
         if (gender) query.gender = gender;
         if (color) query.color = color;
         if (search) query.$or = [
