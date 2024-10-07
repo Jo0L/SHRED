@@ -18,7 +18,6 @@ const getCart = async (username) => {
     }
 };
 
-
 const addToCart = async (username, accessoryId, price, quantity, title, img) => {
     try {
         const user = await User.findOne({ _id: username });
@@ -110,7 +109,6 @@ const deleteItem = async (username, accessoryId) => {
     }
 };
 
-
 const clearCart = async (username) => {
     try {
         const user = await User.findOne({ _id: username });
@@ -129,8 +127,6 @@ const clearCart = async (username) => {
         throw error;
     }
 };
-
-
 
 module.exports = { 
     getCart, 

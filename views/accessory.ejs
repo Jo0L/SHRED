@@ -20,7 +20,7 @@
                     <p class="price">$<%= accessory.price %></p>
                     <p class="text-muted"><%= accessory.color %></p>
                     <div class="buttons">
-                        <span class="wishlist">☆</span>
+                        <span id="add-to-wishlist" class="wishlist" data-accessory-id="<%= accessory._id %>">☆</span>
                         <button id="add-to-cart" class="add-to-cart" data-accessory-id="<%= accessory._id %>" data-price="<%= accessory.price %>" data-quantity="1" data-title="<%= accessory.company %> - <%= accessory.color %>" data-img="<%= accessory.img %>">Add to Cart</button>
                         <% if ( isAdmin) { %>
                             <div class="admin-actions">

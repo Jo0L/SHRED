@@ -1,13 +1,16 @@
 require('dotenv').config(); 
 const { existsSync } = require('fs');
+
 const express = require('express');
 const session = require('express-session');
 const mongoose =  require('mongoose');
+
 const login = require('./routes/login')
 const accessories = require('./routes/accessories')
 const users = require('./routes/users')
 const orders = require('./routes/orders')
 const cart = require('./routes/cart')
+const wishlist = require('./routes/wishlist')
 const manager = require('./routes/manager')
 const paymentRoutes = require('./routes/payment'); 
 
@@ -40,6 +43,7 @@ server.use('', login);
 server.use('/accessories', accessories);
 server.use('/users', users);
 server.use('/cart', cart);
+server.use('/wishlist', wishlist);
 server.use('/orders', orders);
 server.use('/manager', manager);
 server.use('/', paymentRoutes);

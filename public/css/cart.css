@@ -289,3 +289,35 @@
     height: 1px;
     background: #ccc;
 }
+
+/* Wishlist */
+
+.wishlist-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 2% 4.5%;
+    background-color: #f9f9f9;
+    padding-bottom: 20vh;
+}
+
+.wishlist-wrapper h1 {
+    font-size: 200%;
+    margin-bottom: 3vh;
+    border-bottom: 1.5px solid #cccccce3;
+    font-family: SHREAD;
+}
+
+.wishlist-container {
+    display: flex;
+    flex-direction: row;
+    gap: 3vw;
+    width: 100%;
+}
+
+.wishlist-container img {
+    height: 25vh;
+    width: 150px;
+    background: transparent;
+    border-radius: 15px;
+    border: 1px solid #555;
+}
