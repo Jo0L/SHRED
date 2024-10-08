@@ -23,7 +23,7 @@ const createOrder = async (user, items, price, amount, paymentData, status) => {
 };
 
 const getOrdersByUser = async (user) => {
-    return await Order.find({user});
+    return await Order.find({user}).sort({date: -1});
 };
 
 const getAllOrders = async () => {

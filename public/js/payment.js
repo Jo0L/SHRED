@@ -39,9 +39,9 @@ $(document).ready(function() {
             billingAddress: $('#billingAddress').val(),
         };
 
-        // Send the POST request to the /orders/createorder route
+        // Send the POST request to the /orders route
         $.ajax({
-            url: '/orders/createorder',
+            url: '/orders',
             type: 'POST',
             data: paymentData, // Data to send
             success: function(response) {

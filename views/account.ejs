@@ -3,6 +3,7 @@
     <head>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <%- include('include/_header') %>
+        <link rel="stylesheet" href="css/cart.css">
         <link rel="stylesheet" href="css/account.css">
     </head>
     <body>
@@ -13,11 +14,23 @@
         <main>
             <div class="container-fluid">
                 <div class="row">
-                    <!-- User's orders + whishlist -->
+                    <!-- User's orders + wishlist -->
                     <div class="col-8">
-                        <div id="order-container" class="mb-4"></div>
-                        <h5>Whishlist</h5>
-                        <div id="whishlist-container"></div>
+                        <div id="order-container" class="mb-4"></div>    
+                        <!-- Modal Structure -->
+                        <div class="modal fade" id="order-view" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content p-4" id="order-items"></div>
+                            </div>
+                        </div>              
+                        
+                        <div class="wishlist-wrapper">
+                            <h5>Wishlist</h5>
+                            
+                            <!-- Will contain the wishlist -->
+                            <div id="wishlist-container" class="wishlist-container"></div>
+                        </div>
+                        
                     </div>
                     <!-- User's info -->
                     <div class="col-4 container">

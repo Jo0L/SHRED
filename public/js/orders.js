@@ -1,3 +1,8 @@
+// Initialize tooltips
+$(document).ready(() => {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 // Delete am item
 $(document).ready(() => {
     // When the delete modal is shown

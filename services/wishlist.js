@@ -11,11 +11,11 @@ const addOrRemoveItem = async (username, accessoryId) => {
         }
 
         // Find the index of the item in the wishlist
-        const wishlistItemIndex = user.whishlist.findIndex(item => item.accessoryId.toString() === accessoryId);
+        const wishlistItemIndex = user.wishlist.findIndex(item => item.accessoryId.toString() === accessoryId);
 
         if (wishlistItemIndex === -1) {
             // If the item doesn't exist in the wishlist, add it
-            user.whishlist.push({
+            user.wishlist.push({
                 accessoryId,
             });
 
@@ -24,7 +24,7 @@ const addOrRemoveItem = async (username, accessoryId) => {
 
         } else {
             // If the item exists in the wishlist, remove it
-            user.whishlist.splice(wishlistItemIndex, 1);
+            user.wishlist.splice(wishlistItemIndex, 1);
 
             await user.save();
             return "Removed";
@@ -46,7 +46,7 @@ const isInWishlist = async (username, accessoryId) => {
         }
 
         // Find the index of the item in the wishlist
-        const wishlistItemIndex = user.whishlist.findIndex(item => item.accessoryId.toString() === accessoryId);
+        const wishlistItemIndex = user.wishlist.findIndex(item => item.accessoryId.toString() === accessoryId);
 
         // If the item exists in the wishlist return true otherwise return false.
         if (wishlistItemIndex === -1) {
@@ -72,7 +72,7 @@ const getWishlist = async (username) => {
         }
 
         // Get wishlist
-        const wishlist = user.whishlist;
+        const wishlist = user.wishlist;
     
         // Create a new array to store the accessory data
         const wishlistData = [];
