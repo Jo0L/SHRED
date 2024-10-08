@@ -7,7 +7,7 @@ const User = new Schema({
     lastName: String,
     gender: { type: String, enum: ['Male', 'Female', 'Rather not say'], required: true },
     address: String,
-    whishlist: Array,
+    wishlist: Array,
     isAdmin: Boolean,
     cart: [
         {
