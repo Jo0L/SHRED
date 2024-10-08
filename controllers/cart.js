@@ -11,7 +11,6 @@ const getCart = async (req, res) => {
 
     try {
         const cart = await cartService.getCart(username);
-        // const orders = await orderService.getOrdersByUser(username);
 
         if (cart) {
             // Calculate totals
