@@ -33,7 +33,6 @@ const loadWishlist = async (res) => {
 
 const loadOrders = async (res) =>  {
     const orders = await res.json();
-    // TODO: show cart preview of the order onclick
     orders.forEach(order => {
         const $card = $(`
             <div class="card clickable p-2 mb-2">
@@ -44,19 +43,37 @@ const loadOrders = async (res) =>  {
                     </span>
                     <span class="col-3 card-text text-right">
                         <h6>$${order.price.toFixed(2)}</h6>
+                        <h6><i>${order.status}</i></h6>
                     </span>
                 </span>
             </div>`);
+        // Trigger modal - show view of the order onclick
+        $card.click(() => {
+            $('#order-items').html(order.items.map(item =>`  
+                <div id="${item.accessoryId}" class="cart-item">
+                    <div class="img-details">
+                        <a href="/accessories/?id=${item.accessoryId}" class="wishlist-item">
+                            <img src="${item.img}" alt="${item.title}" class="wishlist-item-image"/>
+                        </a>
+                    </div>
+
+                    <div class="item-details">
+                        <div class="item-details-title">
+                            <h2>${item.title} X ${item.quantity}</h2>
+                            <h2 id="calculate_price-${item.accessoryId}">$${item.price * item.quantity}</h2>
+                        </div>
+                    </div>
+                </div>`).join());
+            $('#order-view').modal('show');
+        });
         $('#order-container').append($card);
     });
 }
 
-// TODO: loading?
 $(document).ready(() => {
     fetch('/users').then(loadInfo).catch(console.error);
     fetch('/orders').then(loadOrders).catch(console.error);
     fetch('/wishlist').then(loadWishlist).catch(console.error);
-    
 });
 
 
