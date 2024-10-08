@@ -46,3 +46,13 @@
     height: 800; 
     border: 2px solid black; 
 }
+.weather-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.weatherWidget {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
