@@ -1,7 +1,8 @@
 // add an item
 $('#add-button').click(() => { 
+
     $('#error-message').hide().text('');
-    
+
     $.ajax({
         url: '/manager/add-accessory',
         type: 'POST',
@@ -18,7 +19,7 @@ $('#add-button').click(() => {
 });
 
 
-// Edit an itema
+// Edit an item
 $('#edit-button').click(() => {  
     // Get the ID of the item to be edited
     const accessoryId = $(this).data('id');
@@ -151,5 +152,18 @@ $(document).ready(function () {
         $('#gender').val('');
         $('#stock').val('');
         $('tbody tr').show(); // Show all rows
+    }
+});
+
+// Make sure the inputs are with positive value
+document.getElementById('price-input').addEventListener('input', function() {
+    if (this.value < 0) {
+        this.value = 0;
+    }
+});
+
+document.getElementById('stock-input').addEventListener('input', function() {
+    if (this.value < 0) {
+        this.value = 0;
     }
 });

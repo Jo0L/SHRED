@@ -76,7 +76,6 @@ $(document).ready(() => {
     fetch('/wishlist').then(loadWishlist).catch(console.error);
 });
 
-
 $('#edit-button').click(() => { 
     $.ajax({
         url: '/users',
@@ -90,4 +89,20 @@ $('#edit-button').click(() => {
             alert('Error changing user details: ' + error);;
         }
     });
+});
+
+// Handle page show event to reload content if coming from cache
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+
+        // Select all elements with the class 'wishlist-item'
+        const wishlistItems = document.querySelectorAll('.wishlist-item');
+
+        // Loop through each element and remove it from the DOM
+        wishlistItems.forEach(item => item.remove());
+
+        // The page was loaded from the cache (navigating back)
+        fetch('/wishlist').then(loadWishlist).catch(console.error);
+
+    }
 });
