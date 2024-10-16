@@ -1,4 +1,7 @@
 const loginService = require('../services/login');
+const usersService = require('../services/users');
+const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 const ensureAuthenticated = async (req, res, next) => {
     if (req.session.username != null)
@@ -18,13 +21,32 @@ const logout = async (req, res) => {
 
 const login = async (req, res) => {
     const { username, password } = req.body;
+    const secretKey = process.env.SECRET_KEY; // Load the secret key from environment variables
+
     try {
-        const result = await loginService.login(username, password);
-        if (result) {
-            req.session.username = username;
-            req.session.isAdmin = result.isAdmin ?? false;
-            res.redirect('/');
+        // Fetch the user from the database by username
+        const user = await usersService.getUserById(username);
+
+        // Check if the user exists and compare the password
+        if (user) {
+            // Concatenate the input password with the secret key
+            const passwordWithKey = password + secretKey;
+
+            // Compare the hashed password stored in the database with the input password
+            const isMatch = await bcrypt.compare(passwordWithKey, user.password);
+
+            if (isMatch) {
+                // If password matches, set session variables and redirect
+                req.session.username = username;
+                req.session.isAdmin = user.isAdmin ?? false;
+                res.redirect('/');
+            } else {
+                // If password does not match, show error
+                req.session.error = 'Username or password incorrect.';
+                res.render('login', { error: req.session.error });
+            }
         } else {
+            // If user does not exist, show error
             req.session.error = 'Username or password incorrect.';
             res.render('login', { error: req.session.error });
         }
@@ -33,12 +55,22 @@ const login = async (req, res) => {
         req.session.error = 'An error occurred during login.';
         res.render('login', { error: req.session.error });
     }
-}
+};
 
 const register = async (req, res) => {
     const { username, password, firstName, lastName, gender } = req.body;
+    const secretKey = process.env.SECRET_KEY; // Load the secret key from environment variables
     try {
-        await loginService.register(username, password, firstName, lastName, gender);
+        // Concatenate the password with the secret key before hashing
+        const passwordWithKey = password + secretKey;
+
+        // Hash the concatenated password and secret key
+        const hashedPassword = await bcrypt.hash(passwordWithKey, 10); // 10 is the salt rounds
+
+        // Pass the hashed password to the registration service
+        await loginService.register(username, hashedPassword, firstName, lastName, gender);
+
+        // Store the username in the session and redirect
         req.session.username = username;
         res.redirect('/');
     } catch (error) {
@@ -54,6 +86,7 @@ const register = async (req, res) => {
     }
 };
 
+// Forgat password machanizem
 const forgotPassword = async (req, res) => {
     const { username } = req.body;
     try {
@@ -105,5 +138,7 @@ const resetPassword = async (req, res) => {
         }
     }
 };
+
+
 
 module.exports = { ensureAuthenticated, ensureAdmin, login, forgotPassword, resetPassword, register, logout };

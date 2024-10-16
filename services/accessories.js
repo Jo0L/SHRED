@@ -80,7 +80,7 @@ const filterAndSortAccessories = async ({ type, gender, sortBy, search, color, p
         if (sortBy === 'price-desc') sortOptions.price = -1;
 
         const skip = (page - 1) * limit;
-        return await Accessory.find(query).sort(sortOptions).skip(skip).limit(limit);
+        return await Accessory.find(query).collation({ locale: 'en', strength: 2 }).sort(sortOptions).skip(skip).limit(limit);
     } catch (err) {
         throw new Error('Failed to filter and sort accessories');
     }

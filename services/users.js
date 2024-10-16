@@ -42,6 +42,7 @@ const changeAdmin = async (id, isAdmin) => {
     return user;
 };
 
+
 module.exports = { 
     getUserById, 
     updateUser, 
