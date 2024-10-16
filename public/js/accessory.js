@@ -153,3 +153,16 @@ $(document).ready(async function () {
         console.error('Error checking wishlist status:', error);
     }
 });
+
+// Make sure the inputs are with positive value
+document.getElementById('price-input').addEventListener('input', function() {
+    if (this.value < 0) {
+        this.value = 0;
+    }
+});
+
+document.getElementById('stock-input').addEventListener('input', function() {
+    if (this.value < 0) {
+        this.value = 0;
+    }
+});

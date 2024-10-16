@@ -1,7 +1,9 @@
 const User = require('../models/user');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 require('dotenv').config();      
+
 
 const register = async (username, password, firstName, lastName, gender) => {
     const user = new User({
@@ -81,30 +83,42 @@ const sendResetEmailToUser = async (username) => {
     }
 }
 
-
 const resetPassword = async (token, newPassword) => {
+    const secretKey = process.env.SECRET_KEY; // Load the secret key from environment variables
+
     // Find the user by the reset token and check if it's still valid
     const user = await User.findOne({
         resetPasswordToken: token,
-        resetPasswordExpires: { $gt: Date.now() } // Check if token is still valid
+        resetPasswordExpires: { $gt: Date.now() } // Check if token is still valid (not expired)
     });
 
     if (!user) {
-        return false;
+        return false; // Return false if user not found or token expired
     }
 
     try {
-        // Update the user's password
-        user.password = newPassword; // Make sure to hash the password
-        user.resetPasswordToken = undefined; // Clear the reset token
-        user.resetPasswordExpires = undefined; // Clear the expiration time
+        // Concatenate the new password with the secret key
+        const passwordWithKey = newPassword + secretKey;
+
+        // Hash the concatenated password and secret key
+        const hashedPassword = await bcrypt.hash(passwordWithKey, 10); // 10 is the salt rounds
+
+        // Update the user's password with the hashed password
+        user.password = hashedPassword;
+
+        // Clear the reset token and expiration date
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+
+        // Save the updated user data
         await user.save();
 
-        return true;
+        return true; // Return true if password reset is successful
+    } catch (error) {
+        console.error('Error resetting password:', error);
+        return false; // Return false if an error occurs
     }
-    catch {
-        return false;
-    }
-}
+};
+
 
 module.exports = { login, register, sendResetEmailToUser, resetPassword };

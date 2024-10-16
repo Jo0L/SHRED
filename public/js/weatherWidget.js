@@ -2,7 +2,7 @@ $(document).ready(function() {
     window.weatherWidgetConfig = window.weatherWidgetConfig || [];
         window.weatherWidgetConfig.push({
             selector: ".weatherWidget",
-            apiKey: "KB3NE8VRBLVAQ8L88WVUYQPLF", // Replace with your API key
+            apiKey: "KB3NE8VRBLVAQ8L88WVUYQPLF",
             location: "Jerusalem, Israel", // Location for the weather forecast
             unitGroup: "metric", // "us" for Fahrenheit, "metric" for Celsius
             forecastDays: 5, // Number of forecast days

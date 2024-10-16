@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav>
-        <div class="navbar">
+        <header class="navbar">
             <a href="/" class="logo">SHRED</a>
             <div class="right">
                 <a href="/about">About</a>
@@ -30,6 +30,7 @@
                         <% } %>
                         <div class="dropdown-content">
                             <% if ( isAdmin ) { %>
+                                <a href="/account"> My Account </a>
                                 <a href="/manager/products"> Products </a>
                                 <a href="/manager/users"> Users </a>
                                 <a href="/manager/orders"> Orders </a>
@@ -43,6 +44,6 @@
                     <a class="important" href="/login">Login</a>
                 <% } %>
             </div>
-        </div>
+        </header>
     </nav>
 </body>

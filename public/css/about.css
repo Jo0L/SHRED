@@ -22,6 +22,7 @@
 .about-section ul {
     list-style: none;
     padding: 0;
+    column-count: 2;
 }
 
 .about-section ul li {
