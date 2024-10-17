@@ -12,8 +12,8 @@ const orders = require('./routes/orders')
 const cart = require('./routes/cart')
 const wishlist = require('./routes/wishlist')
 const manager = require('./routes/manager')
-const paymentRoutes = require('./routes/payment'); 
-const location = require('./routes/location'); 
+const paymentRoutes = require('./routes/payment');
+const location = require('./routes/location');
 
 const { ensureAuthenticated, ensureAdmin } = require('./controllers/login')
 
@@ -61,5 +61,11 @@ server.get('/:page', (req, res, next) => {
     }
 });
 
+// 404 Page Middleware
+server.use((req, res) => {
+    res.status(404).render('404', {username: req.session.username, isAdmin: req.session.isAdmin});
+});
 
-server.listen(process.env.PORT);
+server.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
+});
