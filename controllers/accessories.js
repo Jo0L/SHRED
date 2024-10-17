@@ -88,12 +88,28 @@ const getAllProducts = async (req, res) => {
 };
 
 const getAccessory = async (req, res) => {
-    const accessory = await accessoriesService.getAccessoryById(req.query.id);
-    if (!accessory) {
-        return res.status(404).json({errors: ['Accessory not found'] }); 
+    try {
+        const accessory = await accessoriesService.getAccessoryById(req.query.id);
+        if (!accessory) {
+            // Render the 404 page if accessory is not found
+            return res.status(404).render('404', {
+                username: req.session.username,
+                isAdmin: req.session.isAdmin
+            });
+        }
+        // Render the accessory page if found
+        res.status(200).render('accessory', {
+            accessory,
+            username: req.session.username,
+            isAdmin: req.session.isAdmin
+        });
+    } catch (error) {
+        console.error('Error fetching accessory:', error);
+        return res.status(404).render('404', {
+            username: req.session.username,
+            isAdmin: req.session.isAdmin
+        });
     }
-
-    res.status(200).render('accessory', { accessory, username: req.session.username, isAdmin: req.session.isAdmin });
 };
 
 const updateAccessory = async (req, res) => {
